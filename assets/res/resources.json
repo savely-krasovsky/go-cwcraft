@@ -1,0 +1,200 @@
+[
+  {
+    "id":  "01",
+    "name": "Thread"
+  },
+  {
+    "id":  "02",
+    "name": "Stick"
+  },
+  {
+    "id":  "03",
+    "name": "Pelt"
+  },
+  {
+    "id":  "04",
+    "name": "Bone"
+  },
+  {
+    "id":  "05",
+    "name": "Coal"
+  },
+  {
+    "id":  "06",
+    "name": "Charcoal"
+  },
+  {
+    "id":  "07",
+    "name": "Powder"
+  },
+  {
+    "id":  "08",
+    "name": "Iron ore"
+  },
+  {
+    "id":  "09",
+    "name": "Cloth"
+  },
+  {
+    "id":  "10",
+    "name": "Silver ore"
+  },
+  {
+    "id":  "13",
+    "name": "Magic stone"
+  },
+  {
+    "id":  "14",
+    "name": "Wooden shaft",
+    "recipe": {
+      "Powder": 1,
+      "Stick":  5
+    }
+  },
+  {
+    "id":  "15",
+    "name": "Sapphire"
+  },
+  {
+    "id":  "16",
+    "name": "Solvent"
+  },
+  {
+    "id":  "17",
+    "name": "Ruby"
+  },
+  {
+    "id":  "18",
+    "name": "Hardener"
+  },
+  {
+    "id":  "19",
+    "name": "Steel",
+    "recipe": {
+      "Iron ore": 2,
+      "Powder":   2
+    }
+  },
+  {
+    "id":  "20",
+    "name": "Leather",
+    "recipe": {
+      "Pelt": 4
+    }
+  },
+  {
+    "id":  "21",
+    "name": "Bone powder",
+    "recipe": {
+      "Bone": 4
+    }
+  },
+  {
+    "id":  "22",
+    "name": "String",
+    "recipe": {
+      "Stick": 3
+    }
+  },
+  {
+    "id":  "23",
+    "name": "Coke",
+    "recipe": {
+      "Charcoal": 3,
+      "Coal":     3
+    }
+  },
+  {
+    "id":  "24",
+    "name": "Purified powder",
+    "recipe": {
+      "Bone powder": 2,
+      "Powder":      2,
+      "Magic stone": 1
+    }
+  },
+  {
+    "id":  "25",
+    "name": "Silver alloy",
+    "recipe": {
+      "Purified powder": 1,
+      "Steel":           1,
+      "Silver ore":      1
+    }
+  },
+  {
+    "id":  "27",
+    "name": "Steel mold",
+    "recipe": {
+      "String":   2,
+      "Iron ore": 2,
+      "Powder":   2
+    }
+  },
+  {
+    "id":  "28",
+    "name": "Silver mold",
+    "recipe": {
+      "String":     2,
+      "Silver ore": 2,
+      "Coke":       2
+    }
+  },
+  {
+    "id":  "31",
+    "name": "Rope",
+    "recipe": {
+      "String": 1,
+      "Thread": 4
+    }
+  },
+  {
+    "id":  "33",
+    "name": "Metal plate",
+    "recipe": {
+      "Iron ore": 3,
+      "Stick":    3,
+      "Powder":   3
+    }
+  },
+  {
+    "id":  "100",
+    "name": "Pouch of gold",
+    "recipe": {
+      "Leather": 2,
+      "Thread":  12
+    }
+  },
+  {
+    "id":  "501",
+    "name": "Wrapping",
+    "recipe": {
+      "Cloth":  3,
+      "String": 3
+    }
+  },
+  {
+    "id":  "505",
+    "name": "Wooden arrows pack",
+    "recipe": {
+      "Iron ore": 1,
+      "Stick":    6
+    }
+  },
+  {
+    "id":  "511",
+    "name": "Steel arrows pack",
+    "recipe": {
+      "Steel": 1,
+      "Stick": 4
+    }
+  },
+  {
+    "id":  "tch",
+    "name": "Torch",
+    "recipe": {
+      "Coke":  1,
+      "Stick": 5
+    }
+  }
+]

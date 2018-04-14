@@ -1,0 +1,355 @@
+[
+  {
+    "name": "Champion Sword",
+    "stats": {
+      "attack": 31
+    },
+    "id": "w28",
+    "type": "sword",
+    "mana_cost": 150,
+    "recipe": {
+      "Ruby": 1,
+      "Hardener": 3,
+      "Coke": 41,
+      "Silver alloy": 27,
+      "Steel mold": 3,
+      "Metal plate": 41,
+      "Champion Sword recipe": 1,
+      "Champion blade": 3
+    }
+  },
+  {
+    "name": "Trident",
+    "stats": {
+      "attack": 16,
+      "defense": 14
+    },
+    "id": "w29",
+    "type": "spear",
+    "mana_cost": 150,
+    "recipe": {
+      "Wooden shaft": 41,
+      "Ruby": 1,
+      "Hardener": 3,
+      "Coke": 41,
+      "Silver alloy": 27,
+      "Steel mold": 3,
+      "Trident recipe": 1,
+      "Trident blade": 3
+    }
+  },
+  {
+    "name": "Hunter Bow",
+    "stats": {
+      "attack": 22,
+      "defense": 8
+    },
+    "id": "w30",
+    "type": "bow",
+    "mana_cost": 150,
+    "recipe": {
+      "Wooden shaft": 41,
+      "Ruby": 1,
+      "Hardener": 3,
+      "Coke": 41,
+      "Silver alloy": 27,
+      "Steel mold": 3,
+      "Hunter Bow recipe": 1,
+      "Hunter shaft": 3
+    }
+  },
+  {
+    "name": "War hammer",
+    "stats": {
+      "attack": 15,
+      "defense": 15
+    },
+    "id": "w31",
+    "type": "blunt",
+    "mana_cost": 150,
+    "recipe": {
+      "Ruby": 1,
+      "Hardener": 3,
+      "Coke": 41,
+      "Silver alloy": 27,
+      "Steel mold": 3,
+      "Metal plate": 41,
+      "War hammer recipe": 1,
+      "War hammer head": 3
+    }
+  },
+  {
+    "name": "Hunter Dagger",
+    "stats": {
+      "attack": 10
+    },
+    "id": "w32",
+    "type": "dagger",
+    "mana_cost": 150,
+    "recipe": {
+      "Coke": 7,
+      "Silver alloy": 15,
+      "Steel mold": 1,
+      "Metal plate": 7,
+      "Hunter Dagger recipe": 1,
+      "Hunter blade": 3
+    }
+  },
+  {
+    "name": "Order Armor",
+    "stats": {
+      "attack": 5,
+      "defense": 25
+    },
+    "id": "a27",
+    "type": "heavy armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 3,
+      "Solvent": 5,
+      "Coke": 9,
+      "Silver mold": 3,
+      "Rope": 12,
+      "Metal plate": 15,
+      "Order Armor recipe": 1,
+      "Order Armor piece": 3
+    }
+  },
+  {
+    "name": "Order Helmet",
+    "stats": {
+      "attack": 3,
+      "defense": 15
+    },
+    "id": "a28",
+    "type": "heavy armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 1,
+      "Solvent": 3,
+      "Coke": 7,
+      "Silver mold": 2,
+      "Rope": 9,
+      "Metal plate": 12,
+      "Order Helmet recipe": 1,
+      "Order Helmet fragment": 3
+    }
+  },
+  {
+    "name": "Order Boots",
+    "stats": {
+      "attack": 2,
+      "defense": 10
+    },
+    "id": "a29",
+    "type": "heavy armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Solvent": 1,
+      "Coke": 5,
+      "Silver mold": 1,
+      "Rope": 7,
+      "Metal plate": 9,
+      "Order Boots recipe": 1,
+      "Order Boots part": 3
+    }
+  },
+  {
+    "name": "Order Gauntlets",
+    "stats": {
+      "attack": 2,
+      "defense": 10
+    },
+    "id": "a30",
+    "type": "heavy armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Solvent": 1,
+      "Coke": 5,
+      "Silver mold": 1,
+      "Rope": 7,
+      "Metal plate": 9,
+      "Order Gauntlets recipe": 1,
+      "Order Gauntlets part": 3
+    }
+  },
+  {
+    "name": "Order Shield",
+    "stats": {
+      "defense": 10
+    },
+    "id": "a31",
+    "type": "shield",
+    "mana_cost": 150,
+    "recipe": {
+      "Coke": 7,
+      "Silver alloy": 15,
+      "Silver mold": 1,
+      "Metal plate": 7,
+      "Order shield recipe": 1,
+      "Order shield part": 3
+    }
+  },
+  {
+    "name": "Hunter Armor",
+    "stats": {
+      "attack": 8,
+      "defense": 18
+    },
+    "id": "a32",
+    "type": "light armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 3,
+      "Solvent": 5,
+      "Leather": 24,
+      "Coke": 9,
+      "Silver mold": 3,
+      "Rope": 12,
+      "Hunter Armor recipe": 1,
+      "Hunter Armor part": 3
+    }
+  },
+  {
+    "name": "Hunter Helmet",
+    "stats": {
+      "attack": 5,
+      "defense": 11
+    },
+    "id": "a33",
+    "type": "light armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 1,
+      "Solvent": 3,
+      "Leather": 18,
+      "Coke": 7,
+      "Silver mold": 2,
+      "Rope": 9,
+      "Hunter Helmet recipe": 1,
+      "Hunter Helmet fragment": 3
+    }
+  },
+  {
+    "name": "Hunter Boots",
+    "stats": {
+      "attack": 3,
+      "defense": 8
+    },
+    "id": "a34",
+    "type": "light armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Solvent": 1,
+      "Leather": 12,
+      "Coke": 5,
+      "Silver mold": 1,
+      "Rope": 7,
+      "Hunter Boots recipe": 1,
+      "Hunter Boots part": 3
+    }
+  },
+  {
+    "name": "Hunter Gloves",
+    "stats": {
+      "attack": 3,
+      "defense": 8
+    },
+    "id": "a35",
+    "type": "light armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Solvent": 1,
+      "Leather": 12,
+      "Coke": 5,
+      "Silver mold": 1,
+      "Rope": 7,
+      "Hunter Gloves recipe": 1,
+      "Hunter Gloves part": 3
+    }
+  },
+  {
+    "name": "Clarity Robe",
+    "stats": {
+      "attack": 4,
+      "defense": 20,
+      "mana": 120
+    },
+    "id": "a36",
+    "type": "robe armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 5,
+      "Solvent": 7,
+      "Leather": 15,
+      "Coke": 9,
+      "Silver mold": 3,
+      "Rope": 12,
+      "Clarity Robe recipe": 1,
+      "Clarity Robe piece": 3
+    }
+  },
+  {
+    "name": "Clarity Circlet",
+    "stats": {
+      "attack": 2,
+      "defense": 12,
+      "mana": 80
+    },
+    "id": "a37",
+    "type": "robe armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 3,
+      "Solvent": 5,
+      "Leather": 9,
+      "Coke": 7,
+      "Silver mold": 2,
+      "Rope": 9,
+      "Clarity Circlet recipe": 1,
+      "Clarity Circlet fragment": 3
+    }
+  },
+  {
+    "name": "Clarity Shoes",
+    "stats": {
+      "attack": 1,
+      "defense": 9,
+      "mana": 40
+    },
+    "id": "a38",
+    "type": "robe armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 1,
+      "Solvent": 3,
+      "Leather": 7,
+      "Coke": 3,
+      "Silver mold": 1,
+      "Rope": 5,
+      "Clarity Shoes recipe": 1,
+      "Clarity Shoes part": 3
+    }
+  },
+  {
+    "name": "Clarity Bracers",
+    "stats": {
+      "attack": 1,
+      "defense": 9,
+      "mana": 40
+    },
+    "id": "a39",
+    "type": "robe armor",
+    "mana_cost": 150,
+    "recipe": {
+      "Sapphire": 1,
+      "Solvent": 3,
+      "Leather": 7,
+      "Coke": 3,
+      "Silver mold": 1,
+      "Rope": 5,
+      "Clarity Bracers recipe": 1,
+      "Clarity Bracers part": 3
+    }
+  }
+]

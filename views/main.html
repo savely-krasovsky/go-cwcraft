@@ -1,0 +1,31 @@
+{{define "main"}}
+<div id="goods">
+    <div class="full-width">
+        <input type="text" class="search" placeholder="Search (name, id, type)"/>
+    </div>
+    <ul class="list">
+    {{range .}}
+        <li>
+            <h2 class="name">{{.Name}}</h2>
+            <div class="stats">{{.Stats.Attack}}⚔️ {{.Stats.Defense}}🛡️ {{.Stats.Mana}}💧️</div>
+            <p>ID: <b class="id">{{.ID}}</b></p>
+            <p>Type: <b class="type">{{.Type}}</b></p><br/>
+
+            <ul class="recipe">
+            {{range $key, $value := .Recipe}}
+                <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
+            {{end}}
+            </ul>
+        </li>
+    {{end}}
+    </ul>
+    <button class="btn" data-clipboard-text="/ws_0sARk">
+        Copy to clipboard my shop link 😉
+    </button>
+    <div class="copied">Copied!</div>
+    <p class="about">
+        Made by <a href="https://t.me/DeerBS">Lord Protector</a>
+    </p>
+</div>
+<script src="main.js"></script>
+{{end}}
