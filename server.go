@@ -119,6 +119,19 @@ func getResource(c echo.Context) error {
 	return echo.ErrNotFound
 }
 
+func getBasic(c echo.Context) error {
+	id := c.Param("id")
+
+	for _, item := range items {
+		if item.ID == id {
+			res := getBasicRecursively(map[string]int{}, item.Recipe)
+			return c.JSON(http.StatusOK, res)
+		}
+	}
+
+	return echo.ErrNotFound
+}
+
 func main() {
 	// Read items
 	b, err := ioutil.ReadFile("res/items.json")
@@ -165,6 +178,8 @@ func main() {
 
 	e.GET("/resources", getResources)
 	e.GET("/resources/:id", getResource)
+
+	e.GET("/basic/:id", getBasic)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))
