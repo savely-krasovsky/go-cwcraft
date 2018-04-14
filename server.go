@@ -121,7 +121,7 @@ func getResource(c echo.Context) error {
 
 func main() {
 	// Read items
-	b, err := ioutil.ReadFile("assets/res/items.json")
+	b, err := ioutil.ReadFile("res/items.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -133,7 +133,7 @@ func main() {
 	}
 
 	// Read resources
-	b, err = ioutil.ReadFile("assets/res/resources.json")
+	b, err = ioutil.ReadFile("res/resources.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -145,7 +145,7 @@ func main() {
 	}
 
 	e := echo.New()
-	e.Static("/", "assets")
+	e.Static("/", "static")
 
 	// Middleware
 	e.Use(middleware.Logger())
