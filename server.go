@@ -60,14 +60,12 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 
 func Index(c echo.Context) error {
 	type extendedItem struct {
-		*item
+		item
 		Basics  quickMap
 		Commands []command
 	}
 
 	var extItem []extendedItem
-
-
 
 	for _, item := range items {
 		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
@@ -78,7 +76,7 @@ func Index(c echo.Context) error {
 		}
 
 		extItem = append(extItem, extendedItem{
-			&item,
+			item,
 			basics,
 			commands,
 		})
