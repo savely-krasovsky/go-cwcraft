@@ -11,14 +11,18 @@ import (
 	"encoding/json"
 )
 
+
+
 type (
+	quickMap = map[string]int
+
 	item struct {
 		ID       string         `json:"id"`
 		Name     string         `json:"name"`
 		Stats    stats          `json:"stats"`
 		Type     string         `json:"type"`
 		ManaCost int            `json:"mana_cost,omitempty"`
-		Recipe   map[string]int `json:"recipe,omitempty"`
+		Recipe   quickMap `json:"recipe,omitempty"`
 	}
 
 	stats struct {
@@ -31,7 +35,13 @@ type (
 		ID       string         `json:"id"`
 		Name     string         `json:"name"`
 		ManaCost int            `json:"mana_cost,omitempty"`
-		Recipe   map[string]int `json:"recipe,omitempty"`
+		Recipe   quickMap `json:"recipe,omitempty"`
+	}
+
+	command struct {
+		ID string `json:"id"`
+		Name string `json:"name"`
+		Amount int `json:"amount"`
 	}
 )
 
@@ -49,7 +59,32 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 func Index(c echo.Context) error {
-	return c.Render(http.StatusOK, "index", items)
+	type extendedItem struct {
+		*item
+		Basics  quickMap
+		Commands []command
+	}
+
+	var extItem []extendedItem
+
+
+
+	for _, item := range items {
+		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
+
+		// Don't forget to reverse array
+		for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
+			commands[i], commands[j] = commands[j], commands[i]
+		}
+
+		extItem = append(extItem, extendedItem{
+			&item,
+			basics,
+			commands,
+		})
+	}
+
+	return c.Render(http.StatusOK, "index", extItem)
 }
 
 func getItems(c echo.Context) error {
@@ -119,13 +154,33 @@ func getResource(c echo.Context) error {
 	return echo.ErrNotFound
 }
 
-func getBasic(c echo.Context) error {
+func getBasics(c echo.Context) error {
 	id := c.Param("id")
 
 	for _, item := range items {
 		if item.ID == id {
-			res := getBasicRecursively(map[string]int{}, item.Recipe)
-			return c.JSON(http.StatusOK, res)
+			basics, _ := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
+
+			return c.JSON(http.StatusOK, basics)
+		}
+	}
+
+	return echo.ErrNotFound
+}
+
+func getCommands(c echo.Context) error {
+	id := c.Param("id")
+
+	for _, item := range items {
+		if item.ID == id {
+			_, commands := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
+
+			// Don't forget to reverse array
+			for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
+				commands[i], commands[j] = commands[j], commands[i]
+			}
+
+			return c.JSON(http.StatusOK, commands)
 		}
 	}
 
@@ -179,7 +234,8 @@ func main() {
 	e.GET("/resources", getResources)
 	e.GET("/resources/:id", getResource)
 
-	e.GET("/basic/:id", getBasic)
+	e.GET("/basics/:id", getBasics)
+	e.GET("/commands/:id", getCommands)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))

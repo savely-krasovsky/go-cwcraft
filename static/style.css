@@ -7,6 +7,11 @@ p {
     margin: 0;
 }
 
+textarea {
+    display: block;
+    resize: none;
+}
+
 .full-width {
     display: block;
     overflow: hidden;
@@ -60,6 +65,20 @@ p {
 
     margin: 0;
     padding: 0 0 0;
+}
+
+.basics {
+    list-style-type: none;
+    font-size: 14px;
+
+    padding: 10px 10px 0;
+}
+
+.craft {
+    list-style-type: none;
+    font-size: 14px;
+
+    padding: 10px 10px 0;
 }
 
 .btn {

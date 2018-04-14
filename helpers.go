@@ -14,33 +14,49 @@ func copyMap(m map[string]int) map[string]int {
 	return newMap
 }
 
-func findResource(name string) (resource, error) {
-	for _, resource := range resources {
-		if name == resource.Name {
-			return resource, nil
+func findResourceByName(name string) (resource, error) {
+	for _, res := range resources {
+		if name == res.Name {
+			return res, nil
 		}
 	}
 
 	return resource{}, errors.New("not found")
 }
 
-func getBasicRecursively(basic map[string]int, recipe map[string]int) map[string]int {
+func findResourceByID(ID string) (resource, error) {
+	for _, res := range resources {
+		if ID == res.ID {
+			return res, nil
+		}
+	}
+
+	return resource{}, errors.New("not found")
+}
+
+func getBasicsRecursively(basics quickMap, commands *[]command, recipe quickMap) (quickMap, []command) {
 	for name, amount := range recipe {
-		resource, err := findResource(name)
+		res, err := findResourceByName(name)
 		if err != nil {
 			// If can't find (for example unknown element, recipe or frag)
-			basic[name] += amount
+			basics[name] += amount
 			continue
 		}
 
-		if resource.Recipe == nil {
+		if res.Recipe == nil {
 			// If it already basic
-			basic[name] += amount
+			basics[name] += amount
 			continue
+		} else {
+			*commands = append(*commands, command{
+				res.ID,
+				res.Name,
+				amount,
+			})
 		}
 
 		// Copy (else we will change reference)
-		recipe := copyMap(resource.Recipe)
+		recipe := copyMap(res.Recipe)
 
 		// Multiple amount in recipe
 		for recipeName, recipeAmount := range recipe {
@@ -48,8 +64,8 @@ func getBasicRecursively(basic map[string]int, recipe map[string]int) map[string
 		}
 
 		// Recursively go deeper
-		getBasicRecursively(basic, recipe)
+		getBasicsRecursively(basics, commands, recipe)
 	}
 
-	return basic
+	return basics, *commands
 }

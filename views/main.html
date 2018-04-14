@@ -9,13 +9,37 @@
             <h2 class="name">{{.Name}}</h2>
             <div class="stats">{{.Stats.Attack}}⚔️ {{.Stats.Defense}}🛡️ {{.Stats.Mana}}💧️</div>
             <p>ID: <b class="id">{{.ID}}</b></p>
-            <p>Type: <b class="type">{{.Type}}</b></p><br/>
+            <p>Type: <b class="type">{{.Type}}</b></p>
+
+            <br/>
 
             <ul class="recipe">
             {{range $key, $value := .Recipe}}
                 <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
             {{end}}
             </ul>
+
+            <br/>
+
+            <details>
+                <summary>Basics</summary>
+                <ul class="basics">
+                {{range $key, $value := .Basics}}
+                    <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
+                {{end}}
+                </ul>
+            </details>
+
+            <br/>
+
+            <details>
+                <summary>Craft</summary>
+                <ul class="craft">
+                {{range .Commands}}
+                    <li>{{.Name}}: <textarea rows="1" cols="15" readonly onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea></li>
+                {{end}}
+                </ul>
+            </details>
         </li>
     {{end}}
     </ul>
