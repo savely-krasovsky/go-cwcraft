@@ -1,27 +1,25 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/labstack/gommon/log"
 	"html/template"
 	"io"
-	"net/http"
 	"io/ioutil"
-	"github.com/labstack/gommon/log"
-	"encoding/json"
+	"net/http"
 )
-
-
 
 type (
 	quickMap = map[string]int
 
 	item struct {
-		ID       string         `json:"id"`
-		Name     string         `json:"name"`
-		Stats    stats          `json:"stats"`
-		Type     string         `json:"type"`
-		ManaCost int            `json:"mana_cost,omitempty"`
+		ID       string   `json:"id"`
+		Name     string   `json:"name"`
+		Stats    stats    `json:"stats"`
+		Type     string   `json:"type"`
+		ManaCost int      `json:"mana_cost,omitempty"`
 		Recipe   quickMap `json:"recipe,omitempty"`
 	}
 
@@ -32,21 +30,21 @@ type (
 	}
 
 	resource struct {
-		ID       string         `json:"id"`
-		Name     string         `json:"name"`
-		ManaCost int            `json:"mana_cost,omitempty"`
+		ID       string   `json:"id"`
+		Name     string   `json:"name"`
+		ManaCost int      `json:"mana_cost,omitempty"`
 		Recipe   quickMap `json:"recipe,omitempty"`
 	}
 
 	command struct {
-		ID string `json:"id"`
-		Name string `json:"name"`
-		Amount int `json:"amount"`
+		ID     string `json:"id"`
+		Name   string `json:"name"`
+		Amount int    `json:"amount"`
 	}
 )
 
 var (
-	items []item
+	items     []item
 	resources []resource
 )
 
@@ -61,7 +59,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 func Index(c echo.Context) error {
 	type extendedItem struct {
 		item
-		Basics  quickMap
+		Basics   quickMap
 		Commands []command
 	}
 
