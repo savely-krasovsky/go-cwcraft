@@ -22,9 +22,9 @@ type (
 	}
 
 	stats struct {
-		Attack  int `json:"attack"`
-		Defense int `json:"defense"`
-		Mana    int `json:"mana"`
+		Attack  int `json:"attack,omitempty"`
+		Defense int `json:"defense,omitempty"`
+		Mana    int `json:"mana,omitempty"`
 	}
 
 	resource struct {
