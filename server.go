@@ -40,6 +40,7 @@ type (
 		ID     string `json:"id"`
 		Name   string `json:"name"`
 		Amount int    `json:"amount"`
+		CommandManaCost int `json:"command_mana_cost"`
 	}
 )
 
@@ -61,9 +62,10 @@ func Index(c echo.Context) error {
 		item
 		Basics   quickMap
 		Commands []command
+		TotalManaCost int
 	}
 
-	var extItem []extendedItem
+	var extItems []extendedItem
 
 	for _, item := range items {
 		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
@@ -73,14 +75,30 @@ func Index(c echo.Context) error {
 			commands[i], commands[j] = commands[j], commands[i]
 		}
 
-		extItem = append(extItem, extendedItem{
+		// Add craft itself
+		commands = append(commands, command{
+			item.ID,
+			item.Name,
+			1,
+			item.ManaCost,
+		})
+
+		extItem := extendedItem{
 			item,
 			basics,
 			commands,
-		})
+			0,
+		}
+
+		// Count total mana cost
+		for _, com := range commands {
+			extItem.TotalManaCost += com.CommandManaCost
+		}
+
+		extItems = append(extItems, extItem)
 	}
 
-	return c.Render(http.StatusOK, "index", extItem)
+	return c.Render(http.StatusOK, "index", extItems)
 }
 
 func getItems(c echo.Context) error {

@@ -46,6 +46,7 @@
   {
     "id":  "14",
     "name": "Wooden shaft",
+    "mana_cost": 10,
     "recipe": {
       "Powder": 1,
       "Stick":  5
@@ -70,6 +71,7 @@
   {
     "id":  "19",
     "name": "Steel",
+    "mana_cost": 10,
     "recipe": {
       "Iron ore": 2,
       "Powder":   2
@@ -78,6 +80,7 @@
   {
     "id":  "20",
     "name": "Leather",
+    "mana_cost": 10,
     "recipe": {
       "Pelt": 4
     }
@@ -85,6 +88,7 @@
   {
     "id":  "21",
     "name": "Bone powder",
+    "mana_cost": 10,
     "recipe": {
       "Bone": 4
     }
@@ -92,6 +96,7 @@
   {
     "id":  "22",
     "name": "String",
+    "mana_cost": 10,
     "recipe": {
       "Stick": 3
     }
@@ -99,6 +104,7 @@
   {
     "id":  "23",
     "name": "Coke",
+    "mana_cost": 10,
     "recipe": {
       "Charcoal": 3,
       "Coal":     3
@@ -107,6 +113,7 @@
   {
     "id":  "24",
     "name": "Purified powder",
+    "mana_cost": 10,
     "recipe": {
       "Bone powder": 2,
       "Powder":      2,
@@ -116,6 +123,7 @@
   {
     "id":  "25",
     "name": "Silver alloy",
+    "mana_cost": 15,
     "recipe": {
       "Purified powder": 1,
       "Steel":           1,
@@ -125,6 +133,7 @@
   {
     "id":  "27",
     "name": "Steel mold",
+    "mana_cost": 15,
     "recipe": {
       "String":   2,
       "Iron ore": 2,
@@ -134,6 +143,7 @@
   {
     "id":  "28",
     "name": "Silver mold",
+    "mana_cost": 15,
     "recipe": {
       "String":     2,
       "Silver ore": 2,
@@ -143,6 +153,7 @@
   {
     "id":  "31",
     "name": "Rope",
+    "mana_cost": 10,
     "recipe": {
       "String": 1,
       "Thread": 4
@@ -151,6 +162,7 @@
   {
     "id":  "33",
     "name": "Metal plate",
+    "mana_cost": 10,
     "recipe": {
       "Iron ore": 3,
       "Stick":    3,
@@ -176,6 +188,7 @@
   {
     "id":  "505",
     "name": "Wooden arrows pack",
+    "mana_cost": 80,
     "recipe": {
       "Iron ore": 1,
       "Stick":    6
@@ -184,6 +197,7 @@
   {
     "id":  "511",
     "name": "Steel arrows pack",
+    "mana_cost": 120,
     "recipe": {
       "Steel": 1,
       "Stick": 4

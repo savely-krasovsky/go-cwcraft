@@ -7,11 +7,6 @@ p {
     margin: 0;
 }
 
-textarea {
-    display: block;
-    resize: none;
-}
-
 .full-width {
     display: block;
     overflow: hidden;
@@ -71,14 +66,29 @@ textarea {
     list-style-type: none;
     font-size: 14px;
 
-    padding: 10px 10px 0;
+    padding: 0;
+}
+.basics > li {
+    padding: 0 0 0 0;
 }
 
 .craft {
     list-style-type: none;
     font-size: 14px;
 
-    padding: 10px 10px 0;
+    padding: 0;
+}
+.craft > li {
+    margin-top: 5px;
+}
+.craft > li * {
+    vertical-align: middle;
+}
+.craft > li > label {
+    margin-right: 5px;
+}
+.craft > li > textarea {
+    resize: none;
 }
 
 .btn {

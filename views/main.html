@@ -36,8 +36,9 @@
                 <summary>Craft</summary>
                 <ul class="craft">
                 {{range .Commands}}
-                    <li>{{.Name}}: <textarea rows="1" cols="15" readonly onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea></li>
+                    <li><label><b>{{.Name}}</b> ({{.CommandManaCost}}💧️):</label><textarea rows="1" cols="15" readonly onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea></li>
                 {{end}}
+                    <li><b>Total:</b> {{.TotalManaCost}}💧️</li>
                 </ul>
             </details>
         </li>

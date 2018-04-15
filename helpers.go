@@ -14,7 +14,7 @@ func copyMap(m map[string]int) map[string]int {
 	return newMap
 }
 
-func findResourceByName(name string) (resource, error) {
+func findResource(name string) (resource, error) {
 	for _, res := range resources {
 		if name == res.Name {
 			return res, nil
@@ -24,19 +24,9 @@ func findResourceByName(name string) (resource, error) {
 	return resource{}, errors.New("not found")
 }
 
-func findResourceByID(ID string) (resource, error) {
-	for _, res := range resources {
-		if ID == res.ID {
-			return res, nil
-		}
-	}
-
-	return resource{}, errors.New("not found")
-}
-
 func getBasicsRecursively(basics quickMap, commands *[]command, recipe quickMap) (quickMap, []command) {
 	for name, amount := range recipe {
-		res, err := findResourceByName(name)
+		res, err := findResource(name)
 		if err != nil {
 			// If can't find (for example unknown element, recipe or frag)
 			basics[name] += amount
@@ -52,6 +42,7 @@ func getBasicsRecursively(basics quickMap, commands *[]command, recipe quickMap)
 				res.ID,
 				res.Name,
 				amount,
+				res.ManaCost * amount,
 			})
 		}
 
