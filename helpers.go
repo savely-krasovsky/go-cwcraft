@@ -38,12 +38,29 @@ func getBasicsRecursively(basics quickMap, commands *[]command, recipe quickMap)
 			basics[name] += amount
 			continue
 		} else {
-			*commands = append(*commands, command{
-				res.ID,
-				res.Name,
-				amount,
-				res.ManaCost * amount,
-			})
+			// let's say that -1 means "there is commands with this resource"
+			comIndex := -1
+
+			// find index of resource
+			for i, c := range *commands {
+				if name == c.Name {
+					comIndex = i
+				}
+			}
+
+			// have found? add it to already existing command
+			if comIndex != -1 {
+				(*commands)[comIndex].Amount += amount
+				(*commands)[comIndex].CommandManaCost += res.ManaCost * amount
+			} else {
+				// else just add new
+				*commands = append(*commands, command{
+					res.ID,
+					res.Name,
+					amount,
+					res.ManaCost * amount,
+				})
+			}
 		}
 
 		// Copy (else we will change reference)
