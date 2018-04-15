@@ -71,12 +71,12 @@ func Index(c echo.Context) error {
 	for _, i := range items {
 		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, i.Recipe)
 
-		// Don't forget to reverse array
+		// don't forget to reverse array
 		for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
 			commands[i], commands[j] = commands[j], commands[i]
 		}
 
-		// Add craft itself
+		// add craft itself
 		commands = append(commands, command{
 			i.ID,
 			i.Name,
@@ -91,7 +91,7 @@ func Index(c echo.Context) error {
 			0,
 		}
 
-		// Count total mana cost
+		// count total mana cost
 		for _, com := range commands {
 			extItem.TotalManaCost += com.CommandManaCost
 		}
@@ -121,12 +121,12 @@ func Resources(c echo.Context) error {
 
 		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, r.Recipe)
 
-		// Don't forget to reverse array
+		// don't forget to reverse array
 		for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
 			commands[i], commands[j] = commands[j], commands[i]
 		}
 
-		// Add craft itself
+		// add craft itself
 		commands = append(commands, command{
 			r.ID,
 			r.Name,
@@ -134,7 +134,10 @@ func Resources(c echo.Context) error {
 			r.ManaCost,
 		})
 
+		// show Basics by default
 		sb := true
+
+		// if they equils hide
 		if reflect.DeepEqual(r.Recipe, basics) {
 			sb = false
 		}
@@ -147,7 +150,7 @@ func Resources(c echo.Context) error {
 			0,
 		}
 
-		// Count total mana cost
+		// count total mana cost
 		for _, com := range commands {
 			extItem.TotalManaCost += com.CommandManaCost
 		}
@@ -156,6 +159,10 @@ func Resources(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "resources", extItems)
+}
+
+func Alchemist(c echo.Context) error {
+	return c.String(http.StatusOK, "Coming soon!")
 }
 
 func getItems(c echo.Context) error {
@@ -168,13 +175,13 @@ func getItems(c echo.Context) error {
 	itemType := v.Get("type")
 
 	if name != "" || itemType != "" {
-		for _, item := range items {
-			if item.Name == name {
-				return c.JSON(http.StatusOK, item)
+		for _, i := range items {
+			if i.Name == name {
+				return c.JSON(http.StatusOK, i)
 			}
 
-			if item.Type == itemType {
-				return c.JSON(http.StatusOK, item)
+			if i.Type == itemType {
+				return c.JSON(http.StatusOK, i)
 			}
 		}
 	}
@@ -185,9 +192,9 @@ func getItems(c echo.Context) error {
 func getItem(c echo.Context) error {
 	id := c.Param("id")
 
-	for _, item := range items {
-		if item.ID == id {
-			return c.JSON(http.StatusOK, item)
+	for _, i := range items {
+		if i.ID == id {
+			return c.JSON(http.StatusOK, i)
 		}
 	}
 
@@ -203,9 +210,9 @@ func getResources(c echo.Context) error {
 	name := v.Get("name")
 
 	if name != "" {
-		for _, resource := range resources {
-			if resource.Name == name {
-				return c.JSON(http.StatusOK, resource)
+		for _, r := range resources {
+			if r.Name == name {
+				return c.JSON(http.StatusOK, r)
 			}
 		}
 	}
@@ -216,9 +223,9 @@ func getResources(c echo.Context) error {
 func getResource(c echo.Context) error {
 	id := c.Param("id")
 
-	for _, resource := range resources {
-		if resource.ID == id {
-			return c.JSON(http.StatusOK, resource)
+	for _, r := range resources {
+		if r.ID == id {
+			return c.JSON(http.StatusOK, r)
 		}
 	}
 
@@ -228,10 +235,9 @@ func getResource(c echo.Context) error {
 func getBasics(c echo.Context) error {
 	id := c.Param("id")
 
-	for _, item := range items {
-		if item.ID == id {
-			basics, _ := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
-
+	for _, i := range items {
+		if i.ID == id {
+			basics, _ := getBasicsRecursively(quickMap{}, &[]command{}, i.Recipe)
 			return c.JSON(http.StatusOK, basics)
 		}
 	}
@@ -242,14 +248,22 @@ func getBasics(c echo.Context) error {
 func getCommands(c echo.Context) error {
 	id := c.Param("id")
 
-	for _, item := range items {
-		if item.ID == id {
-			_, commands := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
+	for _, i := range items {
+		if i.ID == id {
+			_, commands := getBasicsRecursively(quickMap{}, &[]command{}, i.Recipe)
 
-			// Don't forget to reverse array
+			// don't forget to reverse array
 			for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
 				commands[i], commands[j] = commands[j], commands[i]
 			}
+
+			// add craft itself
+			commands = append(commands, command{
+				i.ID,
+				i.Name,
+				1,
+				i.ManaCost,
+			})
 
 			return c.JSON(http.StatusOK, commands)
 		}
@@ -299,6 +313,7 @@ func main() {
 	// Routes
 	e.GET("/", Index)
 	e.GET("/resources", Resources)
+	e.GET("/alchemist", Alchemist)
 
 	e.GET("/api/items", getItems)
 	e.GET("/api/items/:id", getItem)

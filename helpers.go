@@ -28,13 +28,13 @@ func getBasicsRecursively(basics quickMap, commands *[]command, recipe quickMap)
 	for name, amount := range recipe {
 		res, err := findResource(name)
 		if err != nil {
-			// If can't find (for example unknown element, recipe or frag)
+			// if can't find (for example unknown element, recipe or frag)
 			basics[name] += amount
 			continue
 		}
 
 		if res.Recipe == nil {
-			// If it already basic
+			// if it already basic
 			basics[name] += amount
 			continue
 		} else {
@@ -63,15 +63,15 @@ func getBasicsRecursively(basics quickMap, commands *[]command, recipe quickMap)
 			}
 		}
 
-		// Copy (else we will change reference)
+		// copy (else we will change reference)
 		recipe := copyMap(res.Recipe)
 
-		// Multiple amount in recipe
+		// multiple amount in recipe
 		for recipeName, recipeAmount := range recipe {
 			recipe[recipeName] = recipeAmount * amount
 		}
 
-		// Recursively go deeper
+		// recursively go deeper
 		getBasicsRecursively(basics, commands, recipe)
 	}
 

@@ -1,4 +1,18 @@
 {{define "footer"}}
+        <script type="text/javascript">
+            $('.search').focus();
+
+            const clipboard = new ClipboardJS('.btn');
+            clipboard.on('success', function () {
+                const copied = $('.copied');
+
+                copied.css("visibility", "visible");
+
+                copied.show();
+                copied.fadeOut(1000);
+            });
+        </script>
+
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
             (function (d, w, c) {
