@@ -9,6 +9,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"reflect"
 )
 
 type (
@@ -67,8 +68,8 @@ func Index(c echo.Context) error {
 
 	var extItems []extendedItem
 
-	for _, item := range items {
-		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, item.Recipe)
+	for _, i := range items {
+		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, i.Recipe)
 
 		// Don't forget to reverse array
 		for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
@@ -77,14 +78,14 @@ func Index(c echo.Context) error {
 
 		// Add craft itself
 		commands = append(commands, command{
-			item.ID,
-			item.Name,
+			i.ID,
+			i.Name,
 			1,
-			item.ManaCost,
+			i.ManaCost,
 		})
 
 		extItem := extendedItem{
-			item,
+			i,
 			basics,
 			commands,
 			0,
@@ -99,6 +100,62 @@ func Index(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "index", extItems)
+}
+
+func Resources(c echo.Context) error {
+	type extendedItem struct {
+		resource
+		Basics   quickMap
+		ShowBasics bool
+		Commands []command
+		TotalManaCost int
+	}
+
+	var extItems []extendedItem
+
+	for _, r := range resources {
+		// skip basic
+		if len(r.Recipe) == 0 {
+			continue
+		}
+
+		basics, commands := getBasicsRecursively(quickMap{}, &[]command{}, r.Recipe)
+
+		// Don't forget to reverse array
+		for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
+			commands[i], commands[j] = commands[j], commands[i]
+		}
+
+		// Add craft itself
+		commands = append(commands, command{
+			r.ID,
+			r.Name,
+			1,
+			r.ManaCost,
+		})
+
+		sb := true
+		if reflect.DeepEqual(r.Recipe, basics) {
+			sb = false
+		}
+
+		extItem := extendedItem{
+			r,
+			basics,
+			sb,
+			commands,
+			0,
+		}
+
+		// Count total mana cost
+		for _, com := range commands {
+			extItem.TotalManaCost += com.CommandManaCost
+		}
+
+		extItems = append(extItems, extItem)
+	}
+
+	return c.Render(http.StatusOK, "resources", extItems)
 }
 
 func getItems(c echo.Context) error {
@@ -235,21 +292,22 @@ func main() {
 
 	// Set renderer
 	t := &Template{
-		templates: template.Must(template.ParseGlob("views/*.html")),
+		templates: template.Must(template.ParseGlob("templates/*.html")),
 	}
 	e.Renderer = t
 
 	// Routes
 	e.GET("/", Index)
+	e.GET("/resources", Resources)
 
-	e.GET("/items", getItems)
-	e.GET("/items/:id", getItem)
+	e.GET("/api/items", getItems)
+	e.GET("/api/items/:id", getItem)
 
-	e.GET("/resources", getResources)
-	e.GET("/resources/:id", getResource)
+	e.GET("/api/resources", getResources)
+	e.GET("/api/resources/:id", getResource)
 
-	e.GET("/basics/:id", getBasics)
-	e.GET("/commands/:id", getCommands)
+	e.GET("/api/basics/:id", getBasics)
+	e.GET("/api/commands/:id", getCommands)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))

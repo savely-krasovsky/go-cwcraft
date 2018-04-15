@@ -1,15 +1,16 @@
-{{define "main"}}
+{{define "resources"}}
+{{template "header" .}}
+
 <div id="goods">
     <div class="full-width">
-        <input type="text" class="search" placeholder="Search (name, id, type)"/>
+        <input type="text" class="search" placeholder="Search"/>
+        <a href="/" class="menu">Main</a>
     </div>
     <ul class="list">
     {{range .}}
         <li>
             <h2 class="name">{{.Name}}</h2>
-            <div class="stats">{{.Stats.Attack}}⚔️ {{.Stats.Defense}}🛡️ {{.Stats.Mana}}💧️</div>
             <p>ID: <b class="id">{{.ID}}</b></p>
-            <p>Type: <b class="type">{{.Type}}</b></p>
 
             <br/>
 
@@ -21,6 +22,7 @@
 
             <br/>
 
+        {{if .ShowBasics}}
             <details>
                 <summary>Basics</summary>
                 <ul class="basics">
@@ -31,12 +33,15 @@
             </details>
 
             <br/>
+        {{end}}
 
             <details>
                 <summary>Craft</summary>
                 <ul class="craft">
                 {{range .Commands}}
-                    <li><label><b>{{.Name}}</b> ({{.CommandManaCost}}💧️):</label><textarea rows="1" cols="15" readonly onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea></li>
+                    <li><label><b>{{.Name}}</b> ({{.CommandManaCost}}💧️):</label><textarea rows="1" cols="15" readonly
+                                                                                            onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea>
+                    </li>
                 {{end}}
                     <li><b>Total:</b> {{.TotalManaCost}}💧️</li>
                 </ul>
@@ -53,4 +58,6 @@
     </p>
 </div>
 <script src="main.js"></script>
+
+{{template "footer" .}}
 {{end}}

@@ -1,0 +1,61 @@
+{{define "index"}}
+{{template "header" .}}
+
+<div id="goods">
+    <div class="full-width">
+        <input type="text" class="search" placeholder="Search"/>
+        <a href="/resources" class="menu">Resources</a>
+    </div>
+    <ul class="list">
+    {{range .}}
+        <li>
+            <h2 class="name">{{.Name}}</h2>
+            <div class="stats">{{.Stats.Attack}}⚔️ {{.Stats.Defense}}🛡️ {{.Stats.Mana}}💧️</div>
+            <p>ID: <b class="id">{{.ID}}</b></p>
+            <p>Type: <b class="type">{{.Type}}</b></p>
+
+            <br/>
+
+            <ul class="recipe">
+            {{range $key, $value := .Recipe}}
+                <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
+            {{end}}
+            </ul>
+
+            <br/>
+
+            <details>
+                <summary>Basics</summary>
+                <ul class="basics">
+                {{range $key, $value := .Basics}}
+                    <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
+                {{end}}
+                </ul>
+            </details>
+
+            <br/>
+
+            <details>
+                <summary>Craft</summary>
+                <ul class="craft">
+                {{range .Commands}}
+                    <li><label><b>{{.Name}}</b> ({{.CommandManaCost}}💧️):</label><textarea rows="1" cols="15" readonly onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea></li>
+                {{end}}
+                    <li><b>Total:</b> {{.TotalManaCost}}💧️</li>
+                </ul>
+            </details>
+        </li>
+    {{end}}
+    </ul>
+    <button class="btn" data-clipboard-text="/ws_0sARk">
+        Copy to clipboard my shop link 😉
+    </button>
+    <div class="copied">Copied!</div>
+    <p class="about">
+        Made by <a href="https://t.me/DeerBS">Lord Protector</a>
+    </p>
+</div>
+<script src="main.js"></script>
+
+{{template "footer" .}}
+{{end}}

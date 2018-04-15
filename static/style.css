@@ -8,9 +8,8 @@ p {
 }
 
 .full-width {
-    display: block;
+    display: flex;
     overflow: hidden;
-    padding-right: 30px;
 }
 
 .search {
@@ -24,10 +23,32 @@ p {
     border: solid 1px #ccc;
     border-radius: 5px;
 }
-
 .search:focus {
     outline: none;
     border-color: #aaa;
+}
+
+.menu {
+    text-align: center;
+    font-size: 22px;
+
+    margin-left: 10px;
+    padding: 8px 8px;
+
+    border-radius: 6px;
+    border: none;
+
+    color: #fff;
+    text-decoration: none;
+    background-color: #ba6900;
+    height: 28px;
+}
+.menu:hover {
+    text-decoration: none;
+    background-color: #724000;
+}
+.menu:focus {
+    outline:none;
 }
 
 .list {
@@ -36,7 +57,6 @@ p {
     margin: 0;
     padding: 0 0 0;
 }
-
 .list > li {
     background-color: #eee;
     padding: 10px;
