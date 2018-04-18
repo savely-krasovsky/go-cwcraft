@@ -38,8 +38,8 @@ func Index(c echo.Context) error {
 		}
 
 		// count total mana cost
-		for _, com := range commands {
-			extItem.TotalManaCost += com.CommandManaCost
+		for _, c := range commands {
+			extItem.TotalManaCost += c.CommandManaCost
 		}
 
 		extItems = append(extItems, extItem)
@@ -86,8 +86,8 @@ func Resources(c echo.Context) error {
 		}
 
 		// count total mana cost
-		for _, com := range commands {
-			extItem.TotalManaCost += com.CommandManaCost
+		for _, c := range commands {
+			extItem.TotalManaCost += c.CommandManaCost
 		}
 
 		extItems = append(extItems, extItem)
@@ -168,6 +168,11 @@ func getResource(c echo.Context) error {
 }
 
 func getBasics(c echo.Context) error {
+	type response struct {
+		Item   item    `json:"item"`
+		Basics []basic `json:"basics"`
+	}
+
 	id := c.Param("id")
 
 	for _, i := range items {
@@ -175,7 +180,10 @@ func getBasics(c echo.Context) error {
 			basics := RecurBasics(i.Recipe)
 			basics = SplitBasics(basics)
 
-			return c.JSON(http.StatusOK, basics)
+			return c.JSON(http.StatusOK, response{
+				i,
+				basics,
+			})
 		}
 	}
 
@@ -183,6 +191,12 @@ func getBasics(c echo.Context) error {
 }
 
 func getCommands(c echo.Context) error {
+	type response struct {
+		Item          item      `json:"item"`
+		Commands      []command `json:"commands"`
+		TotalManaCost int       `json:"total_mana_cost"`
+	}
+
 	id := c.Param("id")
 
 	for _, i := range items {
@@ -198,7 +212,18 @@ func getCommands(c echo.Context) error {
 				i.ManaCost,
 			})
 
-			return c.JSON(http.StatusOK, commands)
+			res := response{
+				i,
+				commands,
+				0,
+			}
+
+			// count total mana cost
+			for _, c := range commands {
+				res.TotalManaCost += c.CommandManaCost
+			}
+
+			return c.JSON(http.StatusOK, res)
 		}
 	}
 

@@ -105,7 +105,7 @@ func RecurCommands(rec map[string]int) (commands []command) {
 			recipe := copyMap(res.Recipe)
 
 			// multiple amount in recipe
-			for recipeName, recipeAmount := range recipe{
+			for recipeName, recipeAmount := range recipe {
 				recipe[recipeName] = recipeAmount * amount
 			}
 
