@@ -35,7 +35,7 @@ Commands []command
 ```
 
 ### basics
-* /api/basics/:id ([example](https://cw.krasovsky.me/basics/a32))
+* `/api/basics/:id` ([example](https://cw.krasovsky.me/basics/a32))
 Returns array of objects with such structure:
 ```golang
 Item   item
@@ -63,4 +63,4 @@ Amount          int
 CommandManaCost int
 ```
 
-Be free to contribute!
+## Feel free to contribute!
