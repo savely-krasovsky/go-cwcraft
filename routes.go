@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/labstack/echo"
 	"net/http"
-	"reflect"
 )
 
 func Index(c echo.Context) error {
@@ -53,7 +52,6 @@ func Resources(c echo.Context) error {
 	type extendedItem struct {
 		resource
 		Basics        []basic
-		ShowBasics    bool
 		Commands      []command
 		TotalManaCost int
 	}
@@ -80,18 +78,9 @@ func Resources(c echo.Context) error {
 			r.ManaCost,
 		})
 
-		// show Basics by default
-		sb := true
-
-		// if they equils hide
-		if reflect.DeepEqual(r.Recipe, basics) {
-			sb = false
-		}
-
 		extItem := extendedItem{
 			r,
 			basics,
-			sb,
 			commands,
 			0,
 		}

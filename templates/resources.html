@@ -23,18 +23,16 @@
 
             <br/>
 
-        {{if .ShowBasics}}
             <details>
                 <summary>Basics</summary>
                 <ul class="basics">
-                {{range $key, $value := .Basics}}
-                    <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
+                {{range .Basics}}
+                    <li><input type="checkbox"/><label>{{.Name}} x {{.Amount}}</label></li>
                 {{end}}
                 </ul>
             </details>
 
             <br/>
-        {{end}}
 
             <details>
                 <summary>Craft</summary>
