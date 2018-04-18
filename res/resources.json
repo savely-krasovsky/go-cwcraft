@@ -47,6 +47,7 @@
     "id":  "14",
     "name": "Wooden shaft",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Powder": 1,
       "Stick":  5
@@ -72,6 +73,7 @@
     "id":  "19",
     "name": "Steel",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Iron ore": 2,
       "Powder":   2
@@ -81,6 +83,7 @@
     "id":  "20",
     "name": "Leather",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Pelt": 4
     }
@@ -89,6 +92,7 @@
     "id":  "21",
     "name": "Bone powder",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Bone": 4
     }
@@ -97,6 +101,7 @@
     "id":  "22",
     "name": "String",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Stick": 3
     }
@@ -105,6 +110,7 @@
     "id":  "23",
     "name": "Coke",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Charcoal": 3,
       "Coal":     3
@@ -114,6 +120,7 @@
     "id":  "24",
     "name": "Purified powder",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Bone powder": 2,
       "Powder":      2,
@@ -124,6 +131,7 @@
     "id":  "25",
     "name": "Silver alloy",
     "mana_cost": 15,
+    "composite": true,
     "recipe": {
       "Purified powder": 1,
       "Steel":           1,
@@ -134,6 +142,7 @@
     "id":  "27",
     "name": "Steel mold",
     "mana_cost": 15,
+    "composite": true,
     "recipe": {
       "String":   2,
       "Iron ore": 2,
@@ -144,6 +153,7 @@
     "id":  "28",
     "name": "Silver mold",
     "mana_cost": 15,
+    "composite": true,
     "recipe": {
       "String":     2,
       "Silver ore": 2,
@@ -154,6 +164,7 @@
     "id":  "31",
     "name": "Rope",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "String": 1,
       "Thread": 4
@@ -163,6 +174,7 @@
     "id":  "33",
     "name": "Metal plate",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Iron ore": 3,
       "Stick":    3,
@@ -172,6 +184,8 @@
   {
     "id":  "100",
     "name": "Pouch of gold",
+    "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Leather": 2,
       "Thread":  12
@@ -180,6 +194,8 @@
   {
     "id":  "501",
     "name": "Wrapping",
+    "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Cloth":  3,
       "String": 3
@@ -206,6 +222,8 @@
   {
     "id":  "tch",
     "name": "Torch",
+    "mana_cost": 80,
+    "composite": true,
     "recipe": {
       "Coke":  1,
       "Stick": 5

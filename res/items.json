@@ -7,6 +7,7 @@
     "id": "w28",
     "type": "sword",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Ruby": 1,
       "Hardener": 3,
@@ -27,6 +28,7 @@
     "id": "w29",
     "type": "spear",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Wooden shaft": 41,
       "Ruby": 1,
@@ -47,6 +49,7 @@
     "id": "w30",
     "type": "bow",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Wooden shaft": 41,
       "Ruby": 1,
@@ -67,6 +70,7 @@
     "id": "w31",
     "type": "blunt",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Ruby": 1,
       "Hardener": 3,
@@ -86,6 +90,7 @@
     "id": "w32",
     "type": "dagger",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Coke": 7,
       "Silver alloy": 15,
@@ -104,6 +109,7 @@
     "id": "a27",
     "type": "heavy armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 3,
       "Solvent": 5,
@@ -124,6 +130,7 @@
     "id": "a28",
     "type": "heavy armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 1,
       "Solvent": 3,
@@ -144,6 +151,7 @@
     "id": "a29",
     "type": "heavy armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Solvent": 1,
       "Coke": 5,
@@ -163,6 +171,7 @@
     "id": "a30",
     "type": "heavy armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Solvent": 1,
       "Coke": 5,
@@ -181,6 +190,7 @@
     "id": "a31",
     "type": "shield",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Coke": 7,
       "Silver alloy": 15,
@@ -199,6 +209,7 @@
     "id": "a32",
     "type": "light armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 3,
       "Solvent": 5,
@@ -219,6 +230,7 @@
     "id": "a33",
     "type": "light armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 1,
       "Solvent": 3,
@@ -239,6 +251,7 @@
     "id": "a34",
     "type": "light armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Solvent": 1,
       "Leather": 12,
@@ -258,6 +271,7 @@
     "id": "a35",
     "type": "light armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Solvent": 1,
       "Leather": 12,
@@ -278,6 +292,7 @@
     "id": "a36",
     "type": "robe armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 5,
       "Solvent": 7,
@@ -299,6 +314,7 @@
     "id": "a37",
     "type": "robe armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 3,
       "Solvent": 5,
@@ -320,6 +336,7 @@
     "id": "a38",
     "type": "robe armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 1,
       "Solvent": 3,
@@ -341,6 +358,7 @@
     "id": "a39",
     "type": "robe armor",
     "mana_cost": 150,
+    "composite": true,
     "recipe": {
       "Sapphire": 1,
       "Solvent": 3,
