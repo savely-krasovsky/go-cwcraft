@@ -8,6 +8,7 @@
 * `/api/items/:id` ([example](https://cw.krasovsky.me/items/a32))
 * `/api/items?name={url_encoded_name}`
 * `/api/items?type={url_encoded_type}`
+
 Returns object or array of objects with such structure:
 ```golang
 ID       string
@@ -28,6 +29,7 @@ Mana    int
 * `/api/resources`
 * `/api/resources/:id` ([example](https://cw.krasovsky.me/resources/25))
 * `/api/resources?name={url_encoded_name}`
+
 Returns object or array of objects with such structure:
 ```golang
 ID        string
@@ -39,6 +41,7 @@ Recipe    map[string]int
 
 ### basics
 * `/api/basics/:id` ([example](https://cw.krasovsky.me/basics/a32))
+
 Returns array of objects with such structure:
 ```golang
 Item   item
@@ -52,6 +55,7 @@ Amount int
 
 ### commands
 * `/api/commands/:id` ([example](https://cw.krasovsky.me/commands/a32))
+
 Returns object with such structure:
 ```golang
 Item          item
