@@ -30,8 +30,11 @@ Mana    int
 * `/api/resources?name={url_encoded_name}`
 Returns object or array of objects with such structure:
 ```golang
-item     item
-Commands []command
+ID        string
+Name      string
+ManaCost  int
+Composite bool
+Recipe    map[string]int
 ```
 
 ### basics
