@@ -59,10 +59,12 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">{{.Name}}</div>
-                                <div class="input-group-text">{{.CommandManaCost}} 💧️</div>
                             </div>
                             <textarea class="form-control" style="resize: none;" rows="1" readonly
                                       onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea>
+                            <div class="input-group-append">
+                                <div class="input-group-text">{{.CommandManaCost}} 💧️</div>
+                            </div>
                         </div>
                     </li>
                 {{end}}
