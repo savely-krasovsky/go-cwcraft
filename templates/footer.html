@@ -1,53 +1,73 @@
 {{define "footer"}}
-        <script type="text/javascript">
-            $('.search').focus();
+    <script type="text/javascript">
+        // Search
+        $(document).ready(function () {
+            if (!window.location.hash) {
+                $('.search').focus();
+            }
+        });
 
-            const clipboard = new ClipboardJS('.btn');
-            clipboard.on('success', function () {
-                const copied = $('.copied');
+        // Spoilers
+        $(".spoiler-trigger").click(function () {
+            $(this).parent().next().collapse('toggle');
+        });
 
-                copied.css("visibility", "visible");
+        // My shop button
+        $('.btn-clipboard').tooltip({
+            trigger: "manual",
+        });
 
-                copied.show();
-                copied.fadeOut(1000);
-            });
-        </script>
+        const clipboard = new ClipboardJS('.btn-clipboard');
 
-        <!-- Yandex.Metrika counter -->
-        <script type="text/javascript">
-            (function (d, w, c) {
-                (w[c] = w[c] || []).push(function () {
-                    try {
-                        w.yaCounter48415427 = new Ya.Metrika({
-                            id: 48415427,
-                            clickmap: true,
-                            trackLinks: true,
-                            accurateTrackBounce: true
-                        });
-                    } catch (e) {
-                    }
-                });
+        // If successfully copied into user's clipboard
+        clipboard.on('success', function () {
+            const copied = $('.btn-clipboard');
 
-                var n = d.getElementsByTagName("script")[0],
-                        s = d.createElement("script"),
-                        f = function () {
-                            n.parentNode.insertBefore(s, n);
-                        };
-                s.type = "text/javascript";
-                s.async = true;
-                s.src = "https://mc.yandex.ru/metrika/watch.js";
+            // Show
+            copied.tooltip('show');
 
-                if (w.opera == "[object Opera]") {
-                    d.addEventListener("DOMContentLoaded", f, false);
-                } else {
-                    f();
+            // And hide after 1 second
+            setTimeout(function () {
+                copied.tooltip('hide')
+            }, 1000);
+        });
+    </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function () {
+                try {
+                    w.yaCounter48415427 = new Ya.Metrika({
+                        id: 48415427,
+                        clickmap: true,
+                        trackLinks: true,
+                        accurateTrackBounce: true
+                    });
+                } catch (e) {
                 }
-            })(document, window, "yandex_metrika_callbacks");
-        </script>
-        <noscript>
-            <div><img src="https://mc.yandex.ru/watch/48415427" style="position:absolute; left:-9999px;" alt=""/></div>
-        </noscript>
-        <!-- /Yandex.Metrika counter -->
-    </body>
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () {
+                        n.parentNode.insertBefore(s, n);
+                    };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else {
+                f();
+            }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/48415427" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+</body>
 </html>
 {{end}}

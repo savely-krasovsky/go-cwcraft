@@ -1,60 +1,95 @@
 {{define "resources"}}
 {{template "header" .}}
 
-<div id="goods">
-    <div class="full-width">
-        <input type="text" class="search" placeholder="Search"/>
-        <a href="/" class="menu">Main</a>
-        <!--<a href="/alchemist" class="menu">Alchemist</a>-->
+<div id="goods" class="container-fluid p-2">
+    <div class="d-flex align-items-center mb-2">
+        <input class="form-control mr-2 search" placeholder="Search"/>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                Menu
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/">Main</a>
+                <a class="dropdown-item" href="/resources">Resources</a>
+                <!--<a class="dropdown-item" href="/alchemist">Alchemist</a>-->
+            </div>
+        </div>
     </div>
-    <ul class="list">
+    <ul class="list-group mb-2 resources">
     {{range .}}
-        <li>
-            <h2 class="name">{{.Name}}</h2>
-            <p>ID: <b class="id">{{.ID}}</b></p>
+        <li id="{{.ID}}" class="list-group-item">
+            <h4><a class="data-name" href="#{{.ID}}">{{.Name}}</a></h4>
 
-            <br/>
+            <ul class="list-group pt-1 mb-2">
+                <li class="list-group-item d-flex justify-content-between align-items-baseline">
+                    ID
+                    <div class="border rounded px-2"><code class="data-id">{{.ID}}</code></div>
+                </li>
+            </ul>
 
-            <ul class="recipe">
+            <ul class="list-group mb-2">
             {{range $key, $value := .Recipe}}
-                <li><input type="checkbox"/><label>{{$key}} x {{$value}}</label></li>
+                <li class="list-group-item">
+                    <input class="mr-2" type="checkbox"/>{{$key}} × {{$value}}
+                </li>
             {{end}}
             </ul>
 
-            <br/>
-
-            <details>
-                <summary>Basics</summary>
-                <ul class="basics">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <button type="button" class="btn spoiler-trigger" data-toggle="collapse">Basics</button>
+                </div>
+                <ul class="list-group list-group-flush collapse out">
                 {{range .Basics}}
-                    <li><input type="checkbox"/><label>{{.Name}} x {{.Amount}}</label></li>
-                {{end}}
-                </ul>
-            </details>
-
-            <br/>
-
-            <details>
-                <summary>Craft</summary>
-                <ul class="craft">
-                {{range .Commands}}
-                    <li><label><b>{{.Name}}</b> ({{.CommandManaCost}}💧️):</label><textarea rows="1" cols="15" readonly
-                                                                                            onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea>
+                    <li class="list-group-item">
+                        <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
                     </li>
                 {{end}}
-                    <li><b>Total:</b> {{.TotalManaCost}}💧️</li>
                 </ul>
-            </details>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-header">
+                    <button type="button" class="btn spoiler-trigger" data-toggle="collapse">Craft</button>
+                </div>
+                <ul class="list-group list-group-flush collapse out">
+                {{range .Commands}}
+                    <li class="list-group-item">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">{{.Name}}</div>
+                                <div class="input-group-text">{{.CommandManaCost}} 💧️</div>
+                            </div>
+                            <textarea class="form-control" style="resize: none;" rows="1" readonly
+                                      onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea>
+                        </div>
+                    </li>
+                {{end}}
+                    <li class="list-group-item">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Total</div>
+                            </div>
+                            <input class="form-control" placeholder="{{.TotalManaCost}} 💧" readonly>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </li>
     {{end}}
     </ul>
-    <button class="btn" data-clipboard-text="/ws_0sARk">
-        Copy to clipboard my shop link 😉
-    </button>
-    <div class="copied">Copied!</div>
-    <p class="about">
-        Made by <a href="https://t.me/DeerBS">Lord Protector</a>
-    </p>
+    <div class="border rounded d-flex justify-content-end p-2">
+        <div class="btn-group" role="group">
+            <a role="button" class="btn btn-primary" href="https://t.me/DeerBS">
+                Made by Lord Protector
+            </a>
+            <button type="button" class="btn btn-secondary btn-clipboard" data-clipboard-text="/ws_0sARk"
+                    data-toggle="tooltip" data-placement="top" title="Copied!">
+                My shop
+            </button>
+        </div>
+    </div>
 </div>
 <script src="resources.js"></script>
 

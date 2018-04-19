@@ -1,3 +1,4 @@
 new List('goods', {
-    valueNames: ['name', 'id', 'type']
+    listClass: "items",
+    valueNames: ['data-name', 'data-id', 'data-type'],
 });
