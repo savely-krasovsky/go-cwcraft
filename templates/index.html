@@ -18,7 +18,7 @@
     </div>
     <ul class="list-group mb-2 items">
     {{range .}}
-        <li id="{{.ID}}" class="list-group-item">
+        <li id="{{.ID}}" class="list-group-item p-2">
             <h4 class="d-flex justify-content-between align-items-baseline">
                 <a class="data-name" href="#{{.ID}}">{{.Name}}</a>
                 <span class="badge badge-light">{{if ne .Stats.Attack 0}}{{.Stats.Attack}}
@@ -27,11 +27,11 @@
             </h4>
 
             <ul class="list-group pt-1 mb-2">
-                <li class="list-group-item d-flex justify-content-between align-items-baseline">
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
                     ID
                     <div class="border rounded px-2"><code class="data-id">{{.ID}}</code></div>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-baseline">
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
                     Type
                     <div class="border rounded px-2"><code class="data-type">{{.Type}}</code></div>
                 </li>
@@ -39,19 +39,19 @@
 
             <ul class="list-group mb-2">
             {{range $key, $value := .Recipe}}
-                <li class="list-group-item py-1">
+                <li class="list-group-item py-1 px-2">
                     <input class="mr-2" type="checkbox"/>{{$key}} × {{$value}}
                 </li>
             {{end}}
             </ul>
 
             <div class="card mb-2">
-                <div class="card-header">
+                <div class="card-header p-2">
                     <button type="button" class="btn spoiler-trigger" data-toggle="collapse">Basics</button>
                 </div>
                 <ul class="list-group list-group-flush collapse out">
                 {{range .Basics}}
-                    <li class="list-group-item py-1">
+                    <li class="list-group-item py-1 px-2">
                         <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
                     </li>
                 {{end}}
@@ -59,7 +59,7 @@
             </div>
 
             <div class="card mb-2">
-                <div class="card-header">
+                <div class="card-header p-2">
                     <button type="button" class="btn spoiler-trigger" data-toggle="collapse">Craft</button>
                 </div>
                 <ul class="list-group list-group-flush collapse out">
