@@ -39,7 +39,7 @@
 
             <ul class="list-group mb-2">
             {{range $key, $value := .Recipe}}
-                <li class="list-group-item">
+                <li class="list-group-item py-1">
                     <input class="mr-2" type="checkbox"/>{{$key}} × {{$value}}
                 </li>
             {{end}}
@@ -51,7 +51,7 @@
                 </div>
                 <ul class="list-group list-group-flush collapse out">
                 {{range .Basics}}
-                    <li class="list-group-item">
+                    <li class="list-group-item py-1">
                         <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
                     </li>
                 {{end}}
@@ -64,7 +64,7 @@
                 </div>
                 <ul class="list-group list-group-flush collapse out">
                 {{range .Commands}}
-                    <li class="list-group-item">
+                    <li class="list-group-item p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">{{.Name}}</div>
@@ -75,7 +75,7 @@
                         </div>
                     </li>
                 {{end}}
-                    <li class="list-group-item">
+                    <li class="list-group-item p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Total</div>
