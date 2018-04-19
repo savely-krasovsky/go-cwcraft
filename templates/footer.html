@@ -1,35 +1,35 @@
 {{define "footer"}}
     <script type="text/javascript">
-        // Search
         $(document).ready(function () {
+            // Search
             if (!window.location.hash) {
                 $('.search').focus();
             }
-        });
 
-        // Spoilers
-        $(".spoiler-trigger").click(function () {
-            $(this).parent().next().collapse('toggle');
-        });
+            // Spoilers
+            $(".spoiler-trigger").click(function () {
+                $(this).parent().next().collapse('toggle');
+            });
 
-        // My shop button
-        $('.btn-clipboard').tooltip({
-            trigger: "manual",
-        });
+            // My shop button
+            $('.btn-clipboard').tooltip({
+                trigger: "manual",
+            });
 
-        const clipboard = new ClipboardJS('.btn-clipboard');
+            const clipboard = new ClipboardJS('.btn-clipboard');
 
-        // If successfully copied into user's clipboard
-        clipboard.on('success', function () {
-            const copied = $('.btn-clipboard');
+            // If successfully copied into user's clipboard
+            clipboard.on('success', function () {
+                const copied = $('.btn-clipboard');
 
-            // Show
-            copied.tooltip('show');
+                // Show
+                copied.tooltip('show');
 
-            // And hide after 1 second
-            setTimeout(function () {
-                copied.tooltip('hide')
-            }, 1000);
+                // And hide after 1 second
+                setTimeout(function () {
+                    copied.tooltip('hide')
+                }, 1000);
+            });
         });
     </script>
 
