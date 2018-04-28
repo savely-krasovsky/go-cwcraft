@@ -33,7 +33,20 @@ type (
 	}
 
 	basic struct {
-		Name   string `json:"name"`
-		Amount int    `json:"amount"`
+		Name       string `json:"name"`
+		Amount     int    `json:"amount"`
+		UserAmount int    `json:"user_amount"`
+	}
+
+	login struct {
+		Status string `json:"status"`
+		ID     int    `json:"id" form:"id" query:"id"`
+		Code   string `json:"code" form:"code" query:"code"`
+	}
+
+	user struct {
+		ID    string         `json:"_key"`
+		Token string         `json:"token,omitempty"`
+		Stock map[string]int `json:"stock,omitempty"`
 	}
 )

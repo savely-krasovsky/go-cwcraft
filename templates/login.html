@@ -1,0 +1,49 @@
+{{define "login"}}
+{{template "header" .}}
+
+<div class="container-fluid p-2">
+    <h3 class="mb-3">Login</h3>
+    <ul class="list-group mb-3">
+        <li class="list-group-item">Enter your ID or Username and click <code class="border rounded p-1">Auth</code>
+        </li>
+        <li class="list-group-item">Check out <a href="https://t.me/chtwrsbot">Chat Wars bot</a> and copy received code
+            here, then click <code class="border rounded p-1">Auth</code> button again
+        </li>
+        <li class="list-group-item">After getting success code, check your stock <a href="/stock">here</a>.</li>
+    </ul>
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label for="inputId">Your Telegram ID</label>
+            <input type="text" class="form-control" name="id" id="inputId" aria-describedby="idHelp"
+                   placeholder="Enter ID">
+        </div>
+        <div class="form-group">
+            <label for="inputCode">Code</label>
+            <input type="password" class="form-control" name="code" id="inputCode" placeholder="Enter code">
+        </div>
+        <div class="d-flex align-items-baseline">
+            <button type="submit" class="btn btn-primary">Auth</button>
+        {{if eq .Status "idNotSpecified"}}
+            <div class="text-warning ml-2">Enter ID</div>{{end}}
+        {{if eq .Status "waitingCode"}}
+            <div class="text-info ml-2">Enter code</div>{{end}}
+        {{if eq .Status "success"}}
+            <div class="text-success ml-2">Success</div>{{end}}
+        {{if eq .Status "timeout"}}
+            <div class="text-danger ml-2">Timeout</div>{{end}}
+        {{if eq .Status "internalError"}}
+            <div class="text-danger ml-2">Internal error</div>{{end}}
+        </div>
+    </form>
+</div>
+{{if ne .Status "success"}}
+<script type="text/javascript">
+    id = {{.ID}};
+    if (id !== 0) {
+        document.getElementById("inputId").value = "{{.ID}}";
+    }
+</script>
+{{end}}
+
+{{template "footer" .}}
+{{end}}

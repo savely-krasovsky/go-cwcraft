@@ -28,6 +28,7 @@ func newBasic(name string, amount int) basic {
 	return basic{
 		name,
 		amount,
+		0,
 	}
 }
 

@@ -18,6 +18,7 @@
     </div>
     <ul class="list-group mb-2 resources">
     {{range .}}
+    {{$showUserData := .ShowUserData}}
         <li id="{{.ID}}" class="list-group-item p-2">
             <h4 class="d-flex justify-content-between align-items-baseline">
                 <a class="data-name" href="#{{.ID}}">{{.Name}}</a>
@@ -31,9 +32,20 @@
             </ul>
 
             <ul class="list-group mb-2">
-            {{range $key, $value := .Recipe}}
+            {{range .Recipe}}
                 <li class="list-group-item py-1 px-2">
-                    <input class="mr-2" type="checkbox"/>{{$key}} × {{$value}}
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <div>
+                            <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
+                        </div>
+                    {{if $showUserData}}
+                    {{if ge .UserAmount .Amount}}
+                        <div class="badge badge-success">{{.UserAmount}}</div>
+                    {{else}}
+                        <div class="badge badge-warning">{{.UserAmount}}</div>
+                    {{end}}
+                    {{end}}
+                    </div>
                 </li>
             {{end}}
             </ul>
@@ -45,7 +57,18 @@
                 <ul class="list-group list-group-flush collapse out">
                 {{range .Basics}}
                     <li class="list-group-item py-1 px-2">
-                        <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <div>
+                                <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
+                            </div>
+                        {{if $showUserData}}
+                        {{if ge .UserAmount .Amount}}
+                            <div class="badge badge-success">{{.UserAmount}}</div>
+                        {{else}}
+                            <div class="badge badge-warning">{{.UserAmount}}</div>
+                        {{end}}
+                        {{end}}
+                        </div>
                     </li>
                 {{end}}
                 </ul>
@@ -95,7 +118,12 @@
         </div>
     </div>
 </div>
-<script src="resources.js"></script>
+<script type="text/javascript">
+    new List('goods', {
+        listClass: "resources",
+        valueNames: ['data-name', 'data-id', 'data-type'],
+    });
+</script>
 
 {{template "footer" .}}
 {{end}}
