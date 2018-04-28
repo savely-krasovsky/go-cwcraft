@@ -1,16 +1,31 @@
 package main
 
 import (
+	"fmt"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo-contrib/session"
 	"net/http"
+	"time"
 )
 
 func Index(c echo.Context) error {
+	sess, _ := session.Get("user", c)
+
+	var user user
+	if id, found := sess.Values["id"]; found {
+		_, err := usersCol.ReadDocument(nil, fmt.Sprint(id), &user)
+		if err != nil {
+			return echo.ErrNotFound
+		}
+	}
+
 	type extendedItem struct {
 		item
+		Recipe        []basic
 		Basics        []basic
 		Commands      []command
 		TotalManaCost int
+		ShowUserData  bool
 	}
 
 	var extItems []extendedItem
@@ -30,11 +45,44 @@ func Index(c echo.Context) error {
 			i.ManaCost,
 		})
 
+		// make recipe to add user amount field
+		var recipe []basic
+		for name, amount := range i.Recipe {
+			if userAmount, found := user.Stock[name]; found {
+				recipe = append(recipe, basic{
+					Name:       name,
+					Amount:     amount,
+					UserAmount: userAmount,
+				})
+			} else {
+				recipe = append(recipe, basic{
+					Name:   name,
+					Amount: amount,
+				})
+			}
+		}
+
+		showUserData := false
+		if user.ID != "" {
+			showUserData = true
+
+			// add user amount to basics
+			for name, amount := range user.Stock {
+				for i := range basics {
+					if basics[i].Name == name {
+						basics[i].UserAmount = amount
+					}
+				}
+			}
+		}
+
 		extItem := extendedItem{
 			i,
+			recipe,
 			basics,
 			commands,
 			0,
+			showUserData,
 		}
 
 		// count total mana cost
@@ -49,11 +97,23 @@ func Index(c echo.Context) error {
 }
 
 func Resources(c echo.Context) error {
+	sess, _ := session.Get("user", c)
+
+	var user user
+	if id, found := sess.Values["id"]; found {
+		_, err := usersCol.ReadDocument(nil, fmt.Sprint(id), &user)
+		if err != nil {
+			return echo.ErrNotFound
+		}
+	}
+
 	type extendedItem struct {
 		resource
+		Recipe        []basic
 		Basics        []basic
 		Commands      []command
 		TotalManaCost int
+		ShowUserData  bool
 	}
 
 	var extItems []extendedItem
@@ -78,11 +138,44 @@ func Resources(c echo.Context) error {
 			r.ManaCost,
 		})
 
+		// make recipe to add user amount field
+		var recipe []basic
+		for name, amount := range r.Recipe {
+			if userAmount, found := user.Stock[name]; found {
+				recipe = append(recipe, basic{
+					Name:       name,
+					Amount:     amount,
+					UserAmount: userAmount,
+				})
+			} else {
+				recipe = append(recipe, basic{
+					Name:   name,
+					Amount: amount,
+				})
+			}
+		}
+
+		showUserData := false
+		if user.ID != "" {
+			showUserData = true
+
+			// add user amount to basics
+			for name, amount := range user.Stock {
+				for i := range basics {
+					if basics[i].Name == name {
+						basics[i].UserAmount = amount
+					}
+				}
+			}
+		}
+
 		extItem := extendedItem{
 			r,
+			recipe,
 			basics,
 			commands,
 			0,
+			showUserData,
 		}
 
 		// count total mana cost
@@ -98,6 +191,87 @@ func Resources(c echo.Context) error {
 
 func Alchemist(c echo.Context) error {
 	return c.String(http.StatusOK, "Coming soon!")
+}
+
+func LoginGet(c echo.Context) error {
+	return c.Render(http.StatusOK, "login", login{})
+}
+
+func LoginPost(c echo.Context) error {
+	l := new(login)
+	if err := c.Bind(l); err != nil {
+		return err
+	}
+
+	if l.ID == 0 {
+		l.Status = "idNotSpecified"
+	} else if l.Code == "" {
+		if err := client.CreateAuthCode(l.ID); err != nil {
+			l.Status = "internalError"
+		} else {
+			// create waiter chan and save it in waiters
+			waiter := make(chan map[string]string, 1)
+			waiters.Store(l.ID, waiter)
+
+			select {
+			// wait auth from updates handler
+			case status := <-waiter:
+				if s, found := status["createAuthCode"]; found {
+					l.Status = s
+				}
+
+				waiters.Delete(l.ID)
+				// or timeout
+			case <-time.After(5 * time.Second):
+				l.Status = "timeout"
+				waiters.Delete(l.ID)
+			}
+		}
+	} else {
+		if err := client.GrantToken(l.ID, l.Code); err != nil {
+			l.Status = "internalError"
+		} else {
+			waiter := make(chan map[string]string, 1)
+			waiters.Store(l.ID, waiter)
+
+			select {
+			// wait auth from updates handler
+			case status := <-waiter:
+				if s, found := status["grantToken"]; found {
+					if s == "success" {
+						// save cookie with ID
+						sess, _ := session.Get("user", c)
+						sess.Values["id"] = fmt.Sprint(l.ID)
+						sess.Save(c.Request(), c.Response())
+
+						l.Status = s
+					} else {
+						l.Status = "internalError"
+					}
+				}
+
+				waiters.Delete(l.ID)
+				// or timeout
+			case <-time.After(5 * time.Second):
+				l.Status = "timeout"
+				waiters.Delete(l.ID)
+			}
+		}
+	}
+
+	return c.Render(http.StatusOK, "login", l)
+}
+
+func Stock(c echo.Context) error {
+	sess, _ := session.Get("user", c)
+
+	var user user
+	_, err := usersCol.ReadDocument(nil, fmt.Sprint(sess.Values["id"]), &user)
+	if err != nil {
+		return echo.ErrNotFound
+	}
+
+	return c.Render(http.StatusOK, "stock", user)
 }
 
 func getItems(c echo.Context) error {
