@@ -37,7 +37,7 @@
         </div>
     </form>
 </div>
-{{if ne .Status "success"}}
+{{if eq .Status "waitingCode"}}
 <script type="text/javascript">
     id = {{.ID}};
     if (id !== 0) {
