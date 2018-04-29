@@ -14,7 +14,7 @@ func HandleUpdate(update cwapi.Response) error {
 			_, err := usersCol.CreateDocument(nil, user{
 				ID: fmt.Sprint(update.ParsedPayload.(cwapi.ResCreateAuthCode).UserID),
 			})
-			if err.(driver.ArangoError).ErrorNum == 1210 {
+			if err != nil && err.(driver.ArangoError).ErrorNum == 1210 {
 				// pass it
 			} else if err != nil {
 				return err
@@ -78,10 +78,10 @@ func HandleUpdate(update cwapi.Response) error {
 func UpdateStocks() error {
 	for {
 		// Get tokens cursor
-		tc, err := db.Query(
+		cursor, err := db.Query(
 			nil,
 			`FOR u IN users
-						RETURN u.token`,
+						RETURN u`,
 			nil,
 		)
 		if err != nil {
@@ -89,12 +89,12 @@ func UpdateStocks() error {
 		}
 
 		// Don't forget to close
-		defer tc.Close()
+		defer cursor.Close()
 
 		// Get all tokens
 		for {
-			var token string
-			_, err := tc.ReadDocument(nil, &token)
+			var user user
+			_, err := cursor.ReadDocument(nil, &user)
 			if driver.IsNoMoreDocuments(err) {
 				break
 			} else if err != nil {
@@ -102,7 +102,7 @@ func UpdateStocks() error {
 			}
 
 			// Request new stock
-			if err := client.RequestStock(token); err != nil {
+			if err := client.RequestStock(user.Token); err != nil {
 				return err
 			}
 		}
