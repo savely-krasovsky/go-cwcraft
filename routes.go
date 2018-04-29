@@ -282,9 +282,11 @@ func LoginPost(c echo.Context) error {
 		}
 	}
 
-	sess, _ := session.Get("user", c)
-	if _, found := sess.Values["id"]; found {
-		l.Status = "alreadyLogged"
+	if l.Status != "success" {
+		sess, _ := session.Get("user", c)
+		if _, found := sess.Values["id"]; found {
+			l.Status = "alreadyLogged"
+		}
 	}
 
 	return c.Render(http.StatusOK, "login", l)
