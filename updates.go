@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/L11R/go-chatwars-api"
 	"github.com/arangodb/go-driver"
-	"github.com/labstack/gommon/log"
 	"time"
 )
 
@@ -86,7 +85,7 @@ func UpdateStocks() error {
 			nil,
 		)
 		if err != nil {
-			log.Error(err)
+			return err
 		}
 
 		// Don't forget to close
@@ -99,12 +98,12 @@ func UpdateStocks() error {
 			if driver.IsNoMoreDocuments(err) {
 				break
 			} else if err != nil {
-				log.Error(err)
+				return err
 			}
 
 			// Request new stock
 			if err := client.RequestStock(token); err != nil {
-				log.Error(err)
+				return err
 			}
 		}
 
