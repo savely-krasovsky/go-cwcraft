@@ -4,17 +4,7 @@
 <div id="goods" class="container-fluid p-2">
     <div class="d-flex align-items-center mb-2">
         <input class="form-control mr-2 search" placeholder="Search"/>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                Menu
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="/">Main</a>
-                <a class="dropdown-item" href="/resources">Resources</a>
-                <!--<a class="dropdown-item" href="/alchemist">Alchemist</a>-->
-            </div>
-        </div>
+    {{template "menu" .}}
     </div>
     <ul class="list-group mb-2 resources">
     {{range .}}

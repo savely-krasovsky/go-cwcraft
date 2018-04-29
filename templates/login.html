@@ -2,7 +2,10 @@
 {{template "header" .}}
 
 <div class="container-fluid p-2">
-    <h3 class="mb-3">Login</h3>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h3>Login</h3>
+    {{template "menu" .}}
+    </div>
     <ul class="list-group mb-3">
         <li class="list-group-item">Enter your ID (you can obtain it with <a href="https://t.me/myidbot">@myidbot</a>)
             and click <code class="border rounded p-1">Auth</code>
