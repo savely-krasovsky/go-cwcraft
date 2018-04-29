@@ -6,6 +6,11 @@
         <h3>Login</h3>
     {{template "menu" .}}
     </div>
+{{if eq .Status "alreadyLogged"}}
+    <div class="alert alert-success" role="alert">
+        You are already logged in.
+    </div>
+{{end}}
     <ul class="list-group mb-3">
         <li class="list-group-item">Enter your ID (you can obtain it with <a href="https://t.me/myidbot">@myidbot</a>)
             and click <code class="border rounded p-1">Auth</code>
@@ -33,6 +38,8 @@
             <div class="text-info ml-2">Enter code</div>{{end}}
         {{if eq .Status "success"}}
             <div class="text-success ml-2">Success</div>{{end}}
+        {{if eq .Status "alreadyLogged"}}
+            <div class="text-info ml-2">Already logged</div>{{end}}
         {{if eq .Status "timeout"}}
             <div class="text-danger ml-2">Timeout</div>{{end}}
         {{if eq .Status "internalError"}}

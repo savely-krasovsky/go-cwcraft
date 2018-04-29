@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/gommon/log"
 	"net/http"
 	"time"
 )
@@ -194,19 +195,30 @@ func Alchemist(c echo.Context) error {
 }
 
 func LoginGet(c echo.Context) error {
-	return c.Render(http.StatusOK, "login", login{})
+	l := login{
+		Status: "unknown",
+	}
+
+	sess, _ := session.Get("user", c)
+	if _, found := sess.Values["id"]; found {
+		l.Status = "alreadyLogged"
+	}
+
+	return c.Render(http.StatusOK, "login", l)
 }
 
 func LoginPost(c echo.Context) error {
 	l := new(login)
 	if err := c.Bind(l); err != nil {
-		return err
+		log.Error(err)
+		l.Status = "internalError"
 	}
 
 	if l.ID == 0 {
 		l.Status = "idNotSpecified"
 	} else if l.Code == "" {
 		if err := client.CreateAuthCode(l.ID); err != nil {
+			log.Error(err)
 			l.Status = "internalError"
 		} else {
 			// create waiter chan and save it in waiters
@@ -229,6 +241,7 @@ func LoginPost(c echo.Context) error {
 		}
 	} else {
 		if err := client.GrantToken(l.ID, l.Code); err != nil {
+			log.Error(err)
 			l.Status = "internalError"
 		} else {
 			waiter := make(chan map[string]string, 1)
@@ -242,7 +255,17 @@ func LoginPost(c echo.Context) error {
 						// save cookie with ID
 						sess, _ := session.Get("user", c)
 						sess.Values["id"] = fmt.Sprint(l.ID)
-						sess.Save(c.Request(), c.Response())
+						if err := sess.Save(c.Request(), c.Response()); err != nil {
+							log.Error(err)
+							l.Status = "internalError"
+						}
+
+						// request stock after login
+						// Request new stock
+						if err := client.RequestStock(fmt.Sprint(l.ID)); err != nil {
+							log.Error(err)
+							l.Status = "internalError"
+						}
 
 						l.Status = s
 					} else {
@@ -257,6 +280,11 @@ func LoginPost(c echo.Context) error {
 				waiters.Delete(l.ID)
 			}
 		}
+	}
+
+	sess, _ := session.Get("user", c)
+	if _, found := sess.Values["id"]; found {
+		l.Status = "alreadyLogged"
 	}
 
 	return c.Render(http.StatusOK, "login", l)
