@@ -63,7 +63,10 @@ func main() {
 	}
 
 	// Update all user stocks
-	go UpdateStocks()
+	go func() {
+		err := UpdateStocks()
+		log.Error(err)
+	}()
 
 	// Read items
 	b, err := ioutil.ReadFile("res/items.json")
