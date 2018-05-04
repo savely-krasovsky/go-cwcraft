@@ -62,11 +62,16 @@ func HandleUpdate(update cwapi.Response) error {
 		}
 	case "requestStock":
 		if update.Result == "Ok" {
-			_, err := usersCol.UpdateDocument(
+			_, err := db.Query(
 				nil,
-				fmt.Sprint(update.ParsedPayload.(cwapi.ResRequestStock).UserID),
-				user{
-					Stock: update.ParsedPayload.(cwapi.ResRequestStock).Stock,
+				`FOR u IN users
+					FILTER u._key == @key 
+						UPDATE u WITH {
+							stock: @stock
+						} IN users OPTIONS {mergeObjects: false}`,
+				map[string]interface{}{
+					"key":   fmt.Sprint(update.ParsedPayload.(cwapi.ResRequestStock).UserID),
+					"stock": update.ParsedPayload.(cwapi.ResRequestStock).Stock,
 				},
 			)
 			if err != nil {
