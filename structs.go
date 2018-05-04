@@ -7,7 +7,7 @@ type (
 		Stats     stats          `json:"stats"`
 		Type      string         `json:"type"`
 		ManaCost  int            `json:"mana_cost,omitempty"`
-		Composite bool           `json:"composite"`
+		Composite bool           `json:"-"`
 		Recipe    map[string]int `json:"recipe,omitempty"`
 	}
 
@@ -17,7 +17,7 @@ type (
 		Effect    string         `json:"effect"`
 		Type      string         `json:"type"`
 		ManaCost  int            `json:"mana_cost,omitempty"`
-		Composite bool           `json:"composite"`
+		Composite bool           `json:"-"`
 		Recipe    map[string]int `json:"recipe,omitempty"`
 	}
 
