@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/gommon/log"
 	"net/http"
+	"sort"
 	"time"
 )
 
@@ -90,6 +91,10 @@ func Index(c echo.Context) error {
 		for _, c := range commands {
 			extItem.TotalManaCost += c.CommandManaCost
 		}
+
+		// Sort recipe and basics to fix it
+		sort.Slice(extItem.Recipe, func(i, j int) bool { return extItem.Recipe[i].Name < extItem.Recipe[j].Name })
+		sort.Slice(extItem.Basics, func(i, j int) bool { return extItem.Basics[i].Name < extItem.Basics[j].Name })
 
 		extItems = append(extItems, extItem)
 	}
@@ -183,6 +188,10 @@ func Resources(c echo.Context) error {
 		for _, c := range commands {
 			extItem.TotalManaCost += c.CommandManaCost
 		}
+
+		// Sort recipe and basics to fix it
+		sort.Slice(extItem.Recipe, func(i, j int) bool { return extItem.Recipe[i].Name < extItem.Recipe[j].Name })
+		sort.Slice(extItem.Basics, func(i, j int) bool { return extItem.Basics[i].Name < extItem.Basics[j].Name })
 
 		extItems = append(extItems, extItem)
 	}
