@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Vial of Rage",
+    "Effect": "+2 ⚔️",
+    "id": "p01",
+    "type": "vial",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Sun Tarragon": 1,
+      "Storm Hyssop": 1
+    }
+  },
+  {
+    "name": "Potion of Rage",
+    "Effect": "+5 ⚔️",
+    "id": "p02",
+    "type": "potion",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Assassin Vine": 1,
+      "Plasma of Abyss": 1,
+      "Storm Hyssop": 2
+    }
+  },
+  {
+    "name": "Bottle of Rage",
+    "Effect": "+9 ⚔️",
+    "id": "p03",
+    "type": "bottle",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Plasma of Abyss": 1,
+      "Spring Bay Leaf": 1,
+      "Wolf Root": 1,
+      "Assassin Vine": 2
+    }
+  },
+  {
+    "name": "Vial of Peace",
+    "Effect": "+2 🛡️",
+    "id": "p04",
+    "type": "vial",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Stinky Sumac": 1,
+      "Cave Garlic": 1
+    }
+  },
+  {
+    "name": "Potion of Peace",
+    "Effect": "+5 🛡️",
+    "id": "p05",
+    "type": "potion",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Ultramarine Dust": 1,
+      "Itacory": 1,
+      "Cave Garlic": 2
+    }
+  },
+  {
+    "name": "Bottle of Peace",
+    "Effect": "+9 🛡️",
+    "id": "p06",
+    "type": "bottle",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Ultramarine Dust": 1,
+      "Itacory": 2,
+      "Dragon Seed": 1,
+      "Spring Bay Leaf": 1
+    }
+  },
+  {
+    "name": "Vial of Greed",
+    "id": "p07",
+    "type": "vial",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Yellow Seed": 1,
+      "Ilaves": 1
+    }
+  },
+  {
+    "name": "Potion of Greed",
+    "id": "p08",
+    "type": "potion",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Ethereal Bone": 1,
+      "Kloliarway": 1
+    }
+  },
+  {
+    "name": "Bottle of Greed",
+    "id": "p09",
+    "type": "bottle",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Love Creeper": 1,
+      "Spring Bay Leaf": 1,
+      "Ethereal Bone": 1,
+      "Kloliarway": 2
+    }
+  },
+  {
+    "name": "Vial of Nature",
+    "Effect": "+1 Harvest skill",
+    "id": "p10",
+    "type": "vial",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Powder": 4,
+      "Ephijora": 1,
+      "Cliff Rue": 1
+    }
+  },
+  {
+    "name": "Potion of Nature",
+    "Effect": "+3 Harvest skill",
+    "id": "p11",
+    "type": "potion",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Powder": 7,
+      "Ephijora": 3,
+      "Bone Powder": 3,
+      "Plasma of Abyss": 1
+    }
+  }
+]

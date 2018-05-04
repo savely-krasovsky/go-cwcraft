@@ -1,10 +1,20 @@
 package main
 
 type (
-	item struct {
+	equipmentItem struct {
 		ID        string         `json:"id"`
 		Name      string         `json:"name"`
 		Stats     stats          `json:"stats"`
+		Type      string         `json:"type"`
+		ManaCost  int            `json:"mana_cost,omitempty"`
+		Composite bool           `json:"composite"`
+		Recipe    map[string]int `json:"recipe,omitempty"`
+	}
+
+	alchemyItem struct {
+		ID        string         `json:"id"`
+		Name      string         `json:"name"`
+		Effect    string         `json:"effect"`
 		Type      string         `json:"type"`
 		ManaCost  int            `json:"mana_cost,omitempty"`
 		Composite bool           `json:"composite"`
@@ -35,7 +45,7 @@ type (
 	basic struct {
 		Name       string `json:"name"`
 		Amount     int    `json:"amount"`
-		UserAmount int    `json:"user_amount"`
+		UserAmount int    `json:"user_amount,omitempty"`
 	}
 
 	login struct {

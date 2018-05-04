@@ -1,86 +1,86 @@
 [
   {
-    "id":  "01",
+    "id": "01",
     "name": "Thread"
   },
   {
-    "id":  "02",
+    "id": "02",
     "name": "Stick"
   },
   {
-    "id":  "03",
+    "id": "03",
     "name": "Pelt"
   },
   {
-    "id":  "04",
+    "id": "04",
     "name": "Bone"
   },
   {
-    "id":  "05",
+    "id": "05",
     "name": "Coal"
   },
   {
-    "id":  "06",
+    "id": "06",
     "name": "Charcoal"
   },
   {
-    "id":  "07",
+    "id": "07",
     "name": "Powder"
   },
   {
-    "id":  "08",
+    "id": "08",
     "name": "Iron ore"
   },
   {
-    "id":  "09",
+    "id": "09",
     "name": "Cloth"
   },
   {
-    "id":  "10",
+    "id": "10",
     "name": "Silver ore"
   },
   {
-    "id":  "13",
+    "id": "13",
     "name": "Magic stone"
   },
   {
-    "id":  "14",
+    "id": "14",
     "name": "Wooden shaft",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
       "Powder": 1,
-      "Stick":  5
+      "Stick": 5
     }
   },
   {
-    "id":  "15",
+    "id": "15",
     "name": "Sapphire"
   },
   {
-    "id":  "16",
+    "id": "16",
     "name": "Solvent"
   },
   {
-    "id":  "17",
+    "id": "17",
     "name": "Ruby"
   },
   {
-    "id":  "18",
+    "id": "18",
     "name": "Hardener"
   },
   {
-    "id":  "19",
+    "id": "19",
     "name": "Steel",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
       "Iron ore": 2,
-      "Powder":   2
+      "Powder": 2
     }
   },
   {
-    "id":  "20",
+    "id": "20",
     "name": "Leather",
     "mana_cost": 10,
     "composite": true,
@@ -89,7 +89,7 @@
     }
   },
   {
-    "id":  "21",
+    "id": "21",
     "name": "Bone powder",
     "mana_cost": 10,
     "composite": true,
@@ -98,7 +98,7 @@
     }
   },
   {
-    "id":  "22",
+    "id": "22",
     "name": "String",
     "mana_cost": 10,
     "composite": true,
@@ -107,61 +107,61 @@
     }
   },
   {
-    "id":  "23",
+    "id": "23",
     "name": "Coke",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
       "Charcoal": 3,
-      "Coal":     3
+      "Coal": 3
     }
   },
   {
-    "id":  "24",
+    "id": "24",
     "name": "Purified powder",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
       "Bone powder": 2,
-      "Powder":      2,
+      "Powder": 2,
       "Magic stone": 1
     }
   },
   {
-    "id":  "25",
+    "id": "25",
     "name": "Silver alloy",
     "mana_cost": 15,
     "composite": true,
     "recipe": {
       "Purified powder": 1,
-      "Steel":           1,
-      "Silver ore":      1
+      "Steel": 1,
+      "Silver ore": 1
     }
   },
   {
-    "id":  "27",
+    "id": "27",
     "name": "Steel mold",
     "mana_cost": 15,
     "composite": true,
     "recipe": {
-      "String":   2,
+      "String": 2,
       "Iron ore": 2,
-      "Powder":   2
+      "Powder": 2
     }
   },
   {
-    "id":  "28",
+    "id": "28",
     "name": "Silver mold",
     "mana_cost": 15,
     "composite": true,
     "recipe": {
-      "String":     2,
+      "String": 2,
       "Silver ore": 2,
-      "Coke":       2
+      "Coke": 2
     }
   },
   {
-    "id":  "31",
+    "id": "31",
     "name": "Rope",
     "mana_cost": 10,
     "composite": true,
@@ -171,47 +171,209 @@
     }
   },
   {
-    "id":  "33",
+    "id": "33",
     "name": "Metal plate",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
       "Iron ore": 3,
-      "Stick":    3,
-      "Powder":   3
+      "Stick": 3,
+      "Powder": 3
     }
   },
   {
-    "id":  "100",
+    "id": "39",
+    "name": "Stinky Sumac"
+  },
+  {
+    "id": "40",
+    "name": "Mercy Sassafras"
+  },
+  {
+    "id": "41",
+    "name": "Cliff Rue"
+  },
+  {
+    "id": "42",
+    "name": "Love Creeper"
+  },
+  {
+    "id": "43",
+    "name": "Wolf Root"
+  },
+  {
+    "id": "44",
+    "name": "Swamp Lavender"
+  },
+  {
+    "id": "45",
+    "name": "White Blossom"
+  },
+  {
+    "id": "46",
+    "name": "Ilaves"
+  },
+  {
+    "id": "47",
+    "name": "Ephijora"
+  },
+  {
+    "id": "48",
+    "name": "Storm Hyssop"
+  },
+  {
+    "id": "49",
+    "name": "Cave Garlic"
+  },
+  {
+    "id": "50",
+    "name": "Yellow Seed"
+  },
+  {
+    "id": "51",
+    "name": "Tecceagrass"
+  },
+  {
+    "id": "52",
+    "name": "Spring Bay Leaf"
+  },
+  {
+    "id": "53",
+    "name": "Ash Rosemary"
+  },
+  {
+    "id": "54",
+    "name": "Sanguine Parsley"
+  },
+  {
+    "id": "55",
+    "name": "Sun Tarragon"
+  },
+  {
+    "id": "56",
+    "name": "Maccunut"
+  },
+  {
+    "id": "57",
+    "name": "Dragon Seed"
+  },
+  {
+    "id": "58",
+    "name": "Queen's Pepper"
+  },
+  {
+    "id": "59",
+    "name": "Plasma of Abyss",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Cliff Rue": 1,
+      "Sun Tarragon": 1,
+      "Cave Garlic": 1
+    }
+  },
+  {
+    "id": "60",
+    "name": "Ultramarine Dust",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Tecceagrass": 1,
+      "Stinky Sumac": 1,
+      "Storm Hyssop": 1
+    }
+  },
+  {
+    "id": "61",
+    "name": "Ethereal Bone",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Yellow Seed": 1,
+      "Ephijora": 1,
+      "Ilaves": 1,
+      "Maccunut": 1
+    }
+  },
+  {
+    "id": "62",
+    "name": "Itacory",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Swamp Lavender": 1,
+      "Ash Rosemary": 1
+    }
+  },
+  {
+    "id": "63",
+    "name": "Assassin Vine",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "White Blossom": 1,
+      "Sanguine Parsley": 1
+    }
+  },
+  {
+    "id": "64",
+    "name": "Kloliarway",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Mercy Sassafras": 1,
+      "Queen's Pepper": 1
+    }
+  },
+  {
+    "id": "100",
     "name": "Pouch of gold",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
       "Leather": 2,
-      "Thread":  12
+      "Thread": 12
     }
   },
   {
-    "id":  "501",
+    "id": "501",
     "name": "Wrapping",
     "mana_cost": 10,
     "composite": true,
     "recipe": {
-      "Cloth":  3,
+      "Cloth": 3,
       "String": 3
     }
   },
   {
-    "id":  "505",
+    "id": "505",
     "name": "Wooden arrows pack",
     "mana_cost": 80,
     "recipe": {
       "Iron ore": 1,
-      "Stick":    6
+      "Stick": 6
     }
   },
   {
-    "id":  "511",
+    "id": "506",
+    "name": "Remedy pack",
+    "mana_cost": 10,
+    "recipe": {
+      "Cliff Rue": 1,
+      "Tecceagrass": 1
+    }
+  },
+  {
+    "id": "508",
+    "name": "Poison pack",
+    "mana_cost": 10,
+    "recipe": {
+      "Maccunut": 1,
+      "Ephijora": 1
+    }
+  },
+  {
+    "id": "511",
     "name": "Steel arrows pack",
     "mana_cost": 120,
     "recipe": {
@@ -220,12 +382,12 @@
     }
   },
   {
-    "id":  "tch",
+    "id": "tch",
     "name": "Torch",
     "mana_cost": 80,
     "composite": true,
     "recipe": {
-      "Coke":  1,
+      "Coke": 1,
       "Stick": 5
     }
   }

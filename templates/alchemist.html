@@ -1,0 +1,124 @@
+{{define "alchemist"}}
+{{template "header" .}}
+
+<div id="goods" class="container-fluid p-2">
+    <div class="d-flex align-items-center mb-2">
+        <input class="form-control mr-2 search" placeholder="Search"/>
+    {{template "menu" .}}
+    </div>
+    <ul class="list-group mb-2 alchemist">
+    {{range .}}
+    {{$showUserData := .ShowUserData}}
+        <li id="{{.ID}}" class="list-group-item p-2">
+            <h4 class="d-flex justify-content-between align-items-baseline">
+                <a class="data-name" href="#{{.ID}}">{{.Name}}</a>
+            {{if ne .Effect ""}}<span class="badge badge-light">{{.Effect}}</span>{{end}}
+            </h4>
+
+            <ul class="list-group pt-1 mb-2">
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
+                    ID
+                    <div class="border rounded px-2"><code class="data-id">{{.ID}}</code></div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
+                    Type
+                    <div class="border rounded px-2"><code class="data-type">{{.Type}}</code></div>
+                </li>
+            </ul>
+
+            <ul class="list-group mb-2">
+            {{range .Recipe}}
+                <li class="list-group-item py-1 px-2">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <div>
+                            <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
+                        </div>
+                    {{if $showUserData}}
+                    {{if ge .UserAmount .Amount}}
+                        <div class="badge badge-success">{{.UserAmount}}</div>
+                    {{else}}
+                        <div class="badge badge-warning">{{.UserAmount}}</div>
+                    {{end}}
+                    {{end}}
+                    </div>
+                </li>
+            {{end}}
+            </ul>
+
+            <div class="card mb-2">
+                <div class="card-header p-2">
+                    <button type="button" class="btn spoiler-trigger" data-toggle="collapse">Basics</button>
+                </div>
+                <ul class="list-group list-group-flush collapse out">
+                {{range .Basics}}
+                    <li class="list-group-item py-1 px-2">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <div>
+                                <input class="mr-2" type="checkbox"/>{{.Name}} × {{.Amount}}
+                            </div>
+                        {{if $showUserData}}
+                        {{if ge .UserAmount .Amount}}
+                            <div class="badge badge-success">{{.UserAmount}}</div>
+                        {{else}}
+                            <div class="badge badge-warning">{{.UserAmount}}</div>
+                        {{end}}
+                        {{end}}
+                        </div>
+                    </li>
+                {{end}}
+                </ul>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-header p-2">
+                    <button type="button" class="btn spoiler-trigger" data-toggle="collapse">Craft</button>
+                </div>
+                <ul class="list-group list-group-flush collapse out">
+                {{range .Commands}}
+                    <li class="list-group-item p-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">{{.Name}}</div>
+                            </div>
+                            <textarea class="form-control" style="resize: none;" rows="1" readonly
+                                      onclick="this.focus();this.select()">/craft_{{.ID}} {{.Amount}}</textarea>
+                            <div class="input-group-append">
+                                <div class="input-group-text">{{.CommandManaCost}} 💧️</div>
+                            </div>
+                        </div>
+                    </li>
+                {{end}}
+                    <li class="list-group-item p-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Total</div>
+                            </div>
+                            <input class="form-control" placeholder="{{.TotalManaCost}} 💧" readonly>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    {{end}}
+    </ul>
+    <div class="border rounded d-flex justify-content-end p-2">
+        <div class="btn-group" role="group">
+            <a role="button" class="btn btn-primary" href="https://t.me/DeerBS">
+                Made by Lord Protector
+            </a>
+            <button type="button" class="btn btn-secondary btn-clipboard" data-clipboard-text="/ws_0sARk"
+                    data-toggle="tooltip" data-placement="top" title="Copied!">
+                My shop
+            </button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    new List('goods', {
+        listClass: "alchemist",
+        valueNames: ['data-name', 'data-id', 'data-type'],
+    });
+</script>
+
+{{template "footer" .}}
+{{end}}
