@@ -22,7 +22,7 @@ func Index(c echo.Context) error {
 	}
 
 	type extendedItem struct {
-		item
+		equipmentItem
 		Recipe        []basic
 		Basics        []basic
 		Commands      []command
@@ -32,24 +32,24 @@ func Index(c echo.Context) error {
 
 	var extItems []extendedItem
 
-	for _, i := range items {
-		basics := RecurBasics(i.Recipe)
+	for _, e := range equipment {
+		basics := RecurBasics(e.Recipe)
 		basics = SplitBasics(basics)
 
-		commands := RecurCommands(i.Recipe)
+		commands := RecurCommands(e.Recipe)
 		commands = SplitCommands(commands)
 
 		// add craft itself
 		commands = append(commands, command{
-			i.ID,
-			i.Name,
+			e.ID,
+			e.Name,
 			1,
-			i.ManaCost,
+			e.ManaCost,
 		})
 
 		// make recipe to add user amount field
 		var recipe []basic
-		for name, amount := range i.Recipe {
+		for name, amount := range e.Recipe {
 			if userAmount, found := user.Stock[name]; found {
 				recipe = append(recipe, basic{
 					Name:       name,
@@ -79,7 +79,7 @@ func Index(c echo.Context) error {
 		}
 
 		extItem := extendedItem{
-			i,
+			e,
 			recipe,
 			basics,
 			commands,
@@ -200,7 +200,95 @@ func Resources(c echo.Context) error {
 }
 
 func Alchemist(c echo.Context) error {
-	return c.String(http.StatusOK, "Coming soon!")
+	sess, _ := session.Get("user", c)
+
+	var user user
+	if id, found := sess.Values["id"]; found {
+		_, err := usersCol.ReadDocument(nil, fmt.Sprint(id), &user)
+		if err != nil {
+			return echo.ErrNotFound
+		}
+	}
+
+	type extendedItem struct {
+		alchemyItem
+		Recipe        []basic
+		Basics        []basic
+		Commands      []command
+		TotalManaCost int
+		ShowUserData  bool
+	}
+
+	var extItems []extendedItem
+
+	for _, a := range alchemy {
+		basics := RecurBasics(a.Recipe)
+		basics = SplitBasics(basics)
+
+		commands := RecurCommands(a.Recipe)
+		commands = SplitCommands(commands)
+
+		// add craft itself
+		commands = append(commands, command{
+			a.ID,
+			a.Name,
+			1,
+			a.ManaCost,
+		})
+
+		// make recipe to add user amount field
+		var recipe []basic
+		for name, amount := range a.Recipe {
+			if userAmount, found := user.Stock[name]; found {
+				recipe = append(recipe, basic{
+					Name:       name,
+					Amount:     amount,
+					UserAmount: userAmount,
+				})
+			} else {
+				recipe = append(recipe, basic{
+					Name:   name,
+					Amount: amount,
+				})
+			}
+		}
+
+		showUserData := false
+		if user.ID != "" {
+			showUserData = true
+
+			// add user amount to basics
+			for name, amount := range user.Stock {
+				for i := range basics {
+					if basics[i].Name == name {
+						basics[i].UserAmount = amount
+					}
+				}
+			}
+		}
+
+		extItem := extendedItem{
+			a,
+			recipe,
+			basics,
+			commands,
+			0,
+			showUserData,
+		}
+
+		// count total mana cost
+		for _, c := range commands {
+			extItem.TotalManaCost += c.CommandManaCost
+		}
+
+		// Sort recipe and basics to fix it
+		sort.Slice(extItem.Recipe, func(i, j int) bool { return extItem.Recipe[i].Name < extItem.Recipe[j].Name })
+		sort.Slice(extItem.Basics, func(i, j int) bool { return extItem.Basics[i].Name < extItem.Basics[j].Name })
+
+		extItems = append(extItems, extItem)
+	}
+
+	return c.Render(http.StatusOK, "alchemist", extItems)
 }
 
 func LoginGet(c echo.Context) error {
@@ -313,7 +401,7 @@ func Stock(c echo.Context) error {
 	return c.Render(http.StatusOK, "stock", user)
 }
 
-func getItems(c echo.Context) error {
+func getEquipment(c echo.Context) error {
 	v, err := c.FormParams()
 	if err != nil {
 		return echo.ErrMethodNotAllowed
@@ -323,26 +411,62 @@ func getItems(c echo.Context) error {
 	itemType := v.Get("type")
 
 	if name != "" || itemType != "" {
-		for _, i := range items {
-			if i.Name == name {
-				return c.JSON(http.StatusOK, i)
+		for _, e := range equipment {
+			if e.Name == name {
+				return c.JSON(http.StatusOK, e)
 			}
 
-			if i.Type == itemType {
-				return c.JSON(http.StatusOK, i)
+			if e.Type == itemType {
+				return c.JSON(http.StatusOK, e)
 			}
 		}
 	}
 
-	return c.JSON(http.StatusOK, items)
+	return c.JSON(http.StatusOK, equipment)
 }
 
-func getItem(c echo.Context) error {
+func getEquipmentItem(c echo.Context) error {
 	id := c.Param("id")
 
-	for _, i := range items {
-		if i.ID == id {
-			return c.JSON(http.StatusOK, i)
+	for _, e := range equipment {
+		if e.ID == id {
+			return c.JSON(http.StatusOK, e)
+		}
+	}
+
+	return echo.ErrNotFound
+}
+
+func getAlchemy(c echo.Context) error {
+	v, err := c.FormParams()
+	if err != nil {
+		return echo.ErrMethodNotAllowed
+	}
+
+	name := v.Get("name")
+	itemType := v.Get("type")
+
+	if name != "" || itemType != "" {
+		for _, a := range alchemy {
+			if a.Name == name {
+				return c.JSON(http.StatusOK, a)
+			}
+
+			if a.Type == itemType {
+				return c.JSON(http.StatusOK, a)
+			}
+		}
+	}
+
+	return c.JSON(http.StatusOK, equipment)
+}
+
+func getAlchemyItem(c echo.Context) error {
+	id := c.Param("id")
+
+	for _, a := range alchemy {
+		if a.ID == id {
+			return c.JSON(http.StatusOK, a)
 		}
 	}
 
@@ -382,21 +506,37 @@ func getResource(c echo.Context) error {
 
 func getBasics(c echo.Context) error {
 	type response struct {
-		Item   item    `json:"item"`
-		Basics []basic `json:"basics"`
+		Item   interface{} `json:"item"`
+		Basics []basic     `json:"basics"`
 	}
 
 	id := c.Param("id")
+	itemType := c.Param("type")
 
-	for _, i := range items {
-		if i.ID == id {
-			basics := RecurBasics(i.Recipe)
-			basics = SplitBasics(basics)
+	switch itemType {
+	case "equipment":
+		for _, e := range equipment {
+			if e.ID == id {
+				basics := RecurBasics(e.Recipe)
+				basics = SplitBasics(basics)
 
-			return c.JSON(http.StatusOK, response{
-				i,
-				basics,
-			})
+				return c.JSON(http.StatusOK, response{
+					e,
+					basics,
+				})
+			}
+		}
+	case "alchemy":
+		for _, a := range alchemy {
+			if a.ID == id {
+				basics := RecurBasics(a.Recipe)
+				basics = SplitBasics(basics)
+
+				return c.JSON(http.StatusOK, response{
+					a,
+					basics,
+				})
+			}
 		}
 	}
 
@@ -405,38 +545,70 @@ func getBasics(c echo.Context) error {
 
 func getCommands(c echo.Context) error {
 	type response struct {
-		Item          item      `json:"item"`
-		Commands      []command `json:"commands"`
-		TotalManaCost int       `json:"total_mana_cost"`
+		Item          interface{} `json:"item"`
+		Commands      []command   `json:"commands"`
+		TotalManaCost int         `json:"total_mana_cost"`
 	}
 
 	id := c.Param("id")
+	itemType := c.Param("type")
 
-	for _, i := range items {
-		if i.ID == id {
-			commands := RecurCommands(i.Recipe)
-			commands = SplitCommands(commands)
+	switch itemType {
+	case "equipment":
+		for _, e := range equipment {
+			if e.ID == id {
+				commands := RecurCommands(e.Recipe)
+				commands = SplitCommands(commands)
 
-			// add craft itself
-			commands = append(commands, command{
-				i.ID,
-				i.Name,
-				1,
-				i.ManaCost,
-			})
+				// add craft itself
+				commands = append(commands, command{
+					e.ID,
+					e.Name,
+					1,
+					e.ManaCost,
+				})
 
-			res := response{
-				i,
-				commands,
-				0,
+				res := response{
+					e,
+					commands,
+					0,
+				}
+
+				// count total mana cost
+				for _, c := range commands {
+					res.TotalManaCost += c.CommandManaCost
+				}
+
+				return c.JSON(http.StatusOK, res)
 			}
+		}
+	case "alchemy":
+		for _, a := range alchemy {
+			if a.ID == id {
+				commands := RecurCommands(a.Recipe)
+				commands = SplitCommands(commands)
 
-			// count total mana cost
-			for _, c := range commands {
-				res.TotalManaCost += c.CommandManaCost
+				// add craft itself
+				commands = append(commands, command{
+					a.ID,
+					a.Name,
+					1,
+					a.ManaCost,
+				})
+
+				res := response{
+					a,
+					commands,
+					0,
+				}
+
+				// count total mana cost
+				for _, c := range commands {
+					res.TotalManaCost += c.CommandManaCost
+				}
+
+				return c.JSON(http.StatusOK, res)
 			}
-
-			return c.JSON(http.StatusOK, res)
 		}
 	}
 

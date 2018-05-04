@@ -18,7 +18,8 @@ import (
 )
 
 var (
-	items     []item
+	equipment []equipmentItem
+	alchemy   []alchemyItem
 	resources []resource
 
 	client *cwapi.Client
@@ -68,14 +69,26 @@ func main() {
 		log.Error(err)
 	}()
 
-	// Read items
-	b, err := ioutil.ReadFile("res/items.json")
+	// Read equipment
+	b, err := ioutil.ReadFile("res/equipment.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Unmarshal items
-	err = json.Unmarshal(b, &items)
+	// Unmarshal equipment
+	err = json.Unmarshal(b, &equipment)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Read equipment
+	b, err = ioutil.ReadFile("res/alchemy.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Unmarshal equipment
+	err = json.Unmarshal(b, &alchemy)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -116,14 +129,17 @@ func main() {
 
 	e.GET("/stock", Stock)
 
-	e.GET("/api/items", getItems)
-	e.GET("/api/items/:id", getItem)
+	e.GET("/api/equipment", getEquipment)
+	e.GET("/api/equipment/:id", getEquipmentItem)
+
+	e.GET("/api/alchemy", getAlchemy)
+	e.GET("/api/alchemy/:id", getAlchemyItem)
 
 	e.GET("/api/resources", getResources)
 	e.GET("/api/resources/:id", getResource)
 
-	e.GET("/api/basics/:id", getBasics)
-	e.GET("/api/commands/:id", getCommands)
+	e.GET("/api/basics/:type/:id", getBasics)
+	e.GET("/api/commands/:type/:id", getCommands)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))
