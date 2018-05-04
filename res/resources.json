@@ -390,5 +390,149 @@
       "Coke": 1,
       "Stick": 5
     }
+  },
+  {
+    "id": "r01",
+    "name": "Champion Sword recipe"
+  },
+  {
+    "id": "r02",
+    "name": "Trident recipe"
+  },
+  {
+    "id": "r03",
+    "name": "Hunter Bow recipe"
+  },
+  {
+    "id": "r04",
+    "name": "War hammer recipe"
+  },
+  {
+    "id": "r05",
+    "name": "Hunter Dagger recipe"
+  },
+  {
+    "id": "r06",
+    "name": "Order Armor recipe"
+  },
+  {
+    "id": "r07",
+    "name": "Order Helmet recipe"
+  },
+  {
+    "id": "r08",
+    "name": "Order Boots recipe"
+  },
+  {
+    "id": "r09",
+    "name": "Order Gauntlets recipe"
+  },
+  {
+    "id": "r10",
+    "name": "Order shield recipe"
+  },
+  {
+    "id": "r11",
+    "name": "Hunter Armor recipe"
+  },
+  {
+    "id": "r12",
+    "name": "Hunter Helmet recipe"
+  },
+  {
+    "id": "r13",
+    "name": "Hunter Boots recipe"
+  },
+  {
+    "id": "r14",
+    "name": "Hunter Gloves recipe"
+  },
+  {
+    "id": "r15",
+    "name": "Clarity Robe recipe"
+  },
+  {
+    "id": "r16",
+    "name": "Clarity Circlet recipe"
+  },
+  {
+    "id": "r17",
+    "name": "Clarity Shoes recipe"
+  },
+  {
+    "id": "r18",
+    "name": "Clarity Bracers recipe"
+  },
+  {
+    "id": "k01",
+    "name": "Champion blade"
+  },
+  {
+    "id": "k02",
+    "name": "Trident blade"
+  },
+  {
+    "id": "k03",
+    "name": "Hunter shaft"
+  },
+  {
+    "id": "k04",
+    "name": "War hammer head"
+  },
+  {
+    "id": "k05",
+    "name": "Hunter blade"
+  },
+  {
+    "id": "k06",
+    "name": "Order Armor piece"
+  },
+  {
+    "id": "k07",
+    "name": "Order Helmet fragment"
+  },
+  {
+    "id": "k08",
+    "name": "Order Boots part"
+  },
+  {
+    "id": "k09",
+    "name": "Order Gauntlets part"
+  },
+  {
+    "id": "k10",
+    "name": "Order shield part"
+  },
+  {
+    "id": "k11",
+    "name": "Hunter Armor part"
+  },
+  {
+    "id": "k12",
+    "name": "Hunter Helmet fragment"
+  },
+  {
+    "id": "k13",
+    "name": "Hunter Boots part"
+  },
+  {
+    "id": "k14",
+    "name": "Hunter Gloves part"
+  },
+  {
+    "id": "k15",
+    "name": "Clarity Robe piece"
+  },
+  {
+    "id": "k16",
+    "name": "Clarity Circlet fragment"
+  },
+  {
+    "id": "k17",
+    "name": "Clarity Shoes part"
+  },
+  {
+    "id": "k18",
+    "name": "Clarity Bracers part"
   }
 ]
