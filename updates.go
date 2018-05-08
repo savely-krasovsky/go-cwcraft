@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/L11R/go-chatwars-api"
 	"github.com/arangodb/go-driver"
@@ -78,6 +79,40 @@ func HandleUpdate(update cwapi.Response) error {
 				return err
 			}
 		}
+	}
+
+	return nil
+}
+
+func HandlePages(pages []cwapi.YellowPage) error {
+	b, err := json.Marshal(pages)
+	if err != nil {
+		return err
+	}
+
+	_, err = db.Transaction(
+		nil,
+		`function (params) {
+    		const db = require("@arangodb").db;
+			// Truncate shops table
+			db.shops.truncate();
+			
+			// Parse from passed JSON
+			const shops = JSON.parse(params[0]);
+
+			// Insert new shops
+			for (let i = 0; i < shops.length; i++) {
+				db.shops.insert(shops[i])
+			};
+		}`,
+		&driver.TransactionOptions{
+			WaitForSync:      true,
+			WriteCollections: []string{"shops"},
+			Params:           []interface{}{string(b)},
+		},
+	)
+	if err != nil {
+		return err
 	}
 
 	return nil

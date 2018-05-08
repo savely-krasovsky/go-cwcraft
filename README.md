@@ -1,7 +1,7 @@
-# [CW Craft Site 1.3](http://cw.krasovsky.me/)
+# [CW Craft Site 1.4](http://cw.krasovsky.me/)
 ![cw.krasovsky.me](https://i.imgur.com/Q6pUWhw.gif)
 
-# CW Craft API 1.3 documentation
+# CW Craft API 1.4 documentation
 
 ### Equipment
 * `/api/equipment`
@@ -98,6 +98,26 @@ ID              string
 Name            string
 Amount          int
 CommandManaCost int
+```
+
+### shops
+* `/api/shops`
+
+Returns object with such structure:
+```golang
+Link        string
+Name        string
+OwnerName   string
+OwnerCastle string
+Kind        string
+Mana        int
+Offers      []Offer
+```
+Where `Item` is:
+```golang
+Item  string
+Price int
+Mana  int
 ```
 
 ## Feel free to contribute!
