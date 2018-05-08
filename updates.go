@@ -5,13 +5,10 @@ import (
 	"fmt"
 	"github.com/L11R/go-chatwars-api"
 	"github.com/arangodb/go-driver"
-	"github.com/labstack/gommon/log"
 	"time"
 )
 
 func HandleUpdate(update cwapi.Response) error {
-	log.Info(update)
-
 	switch update.Action {
 	case "createAuthCode":
 		if update.Result == "Ok" {
