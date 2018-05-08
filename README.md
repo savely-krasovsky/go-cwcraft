@@ -111,9 +111,9 @@ OwnerName   string
 OwnerCastle string
 Kind        string
 Mana        int
-Offers      []Offer
+Offers      []OfferItem
 ```
-Where `Item` is:
+Where `OfferItem` is:
 ```golang
 Item  string
 Price int
