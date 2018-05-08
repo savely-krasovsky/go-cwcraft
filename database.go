@@ -37,5 +37,10 @@ func InitConnectionPool() error {
 		return err
 	}
 
+	shopsCol, err = db.Collection(nil, "shops")
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

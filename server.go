@@ -26,6 +26,7 @@ var (
 
 	db       driver.Database
 	usersCol driver.Collection
+	shopsCol driver.Collection
 
 	waiters sync.Map
 )
@@ -48,11 +49,21 @@ func main() {
 
 	// Initialize CW API client
 	client = cwapi.NewClient(viper.GetString("cwapi.username"), viper.GetString("cwapi.password"))
+	client.InitYellowPages()
 
-	// Log
+	// API Responses
 	go func() {
 		for update := range client.Updates {
 			if err := HandleUpdate(update); err != nil {
+				log.Error(err)
+			}
+		}
+	}()
+
+	// Yellow pages
+	go func() {
+		for pages := range client.YellowPages {
+			if err := HandlePages(pages); err != nil {
 				log.Error(err)
 			}
 		}
@@ -123,6 +134,7 @@ func main() {
 	e.GET("/", Index)
 	e.GET("/resources", Resources)
 	e.GET("/alchemist", Alchemist)
+	e.GET("/shops", Shops)
 
 	e.GET("/login", LoginGet)
 	e.POST("/login", LoginPost)
@@ -140,6 +152,8 @@ func main() {
 
 	e.GET("/api/basics/:type/:id", getBasics)
 	e.GET("/api/commands/:type/:id", getCommands)
+
+	e.GET("/api/shops", getShops)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))

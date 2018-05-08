@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/L11R/go-chatwars-api"
+	"github.com/arangodb/go-driver"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/gommon/log"
@@ -289,6 +291,39 @@ func Alchemist(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "alchemist", extItems)
+}
+
+func Shops(c echo.Context) error {
+	// Get tokens cursor
+	cursor, err := db.Query(
+		nil,
+		`FOR s IN shops
+			RETURN s`,
+		nil,
+	)
+	if err != nil {
+		return err
+	}
+
+	// Don't forget to close
+	defer cursor.Close()
+
+	var shops []cwapi.YellowPage
+
+	// Get all tokens
+	for {
+		var shop cwapi.YellowPage
+		_, err := cursor.ReadDocument(nil, &shop)
+		if driver.IsNoMoreDocuments(err) {
+			break
+		} else if err != nil {
+			return err
+		}
+
+		shops = append(shops, shop)
+	}
+
+	return c.Render(http.StatusOK, "shops", shops)
 }
 
 func LoginGet(c echo.Context) error {
@@ -613,4 +648,37 @@ func getCommands(c echo.Context) error {
 	}
 
 	return echo.ErrNotFound
+}
+
+func getShops(c echo.Context) error {
+	// Get tokens cursor
+	cursor, err := db.Query(
+		nil,
+		`FOR s IN shops
+			RETURN s`,
+		nil,
+	)
+	if err != nil {
+		return err
+	}
+
+	// Don't forget to close
+	defer cursor.Close()
+
+	var shops []cwapi.YellowPage
+
+	// Get all tokens
+	for {
+		var shop cwapi.YellowPage
+		_, err := cursor.ReadDocument(nil, &shop)
+		if driver.IsNoMoreDocuments(err) {
+			break
+		} else if err != nil {
+			return err
+		}
+
+		shops = append(shops, shop)
+	}
+
+	return c.JSON(http.StatusOK, shops)
 }

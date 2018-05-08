@@ -1,0 +1,72 @@
+{{define "shops"}}
+{{template "header" .}}
+
+<div id="goods" class="container-fluid p-2">
+    <div class="d-flex align-items-center mb-2">
+        <input class="form-control mr-2 search" placeholder="Search"/>
+    {{template "menu" .}}
+    </div>
+    <ul class="list-group mb-2 resources">
+    {{range .}}
+        <li id="{{.Link}}" class="list-group-item p-2">
+            <h4 class="d-flex justify-content-between align-items-baseline">
+                <a class="data-name" href="#{{.Link}}">{{.Name}}</a>
+            </h4>
+
+            <ul class="list-group pt-1 mb-2">
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
+                    Owner
+                    <div class="border rounded px-2"><code class="data-owner-name">{{.OwnerCastle}}{{.OwnerName}}</code>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
+                    Kind
+                    <div class="border rounded px-2"><code class="data-kind">{{.Kind}}</code></div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
+                    Current mana
+                    <div class="border rounded px-2"><code>{{.Mana}} 💧</code></div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-baseline p-2">
+                    Link
+                    <textarea class="form-control data-link" style="resize: none; width: 7em;" rows="1" readonly
+                              onclick="this.focus();this.select()">/ws_{{.Link}}</textarea>
+                </li>
+            </ul>
+
+            <ul class="list-group mb-2">
+            {{range .Offers}}
+                <li class="list-group-item py-1 px-2">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <div>
+                        {{.Item}}
+                        </div>
+                        <div class="badge badge-light">{{.Mana}} 💧 {{.Price}} 💰</div>
+                    </div>
+                </li>
+            {{end}}
+            </ul>
+        </li>
+    {{end}}
+    </ul>
+    <div class="border rounded d-flex justify-content-end p-2">
+        <div class="btn-group" role="group">
+            <a role="button" class="btn btn-primary" href="https://t.me/DeerBS">
+                Made by Lord Protector
+            </a>
+            <button type="button" class="btn btn-secondary btn-clipboard" data-clipboard-text="/ws_0sARk"
+                    data-toggle="tooltip" data-placement="top" title="Copied!">
+                My shop
+            </button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    new List('goods', {
+        listClass: "resources",
+        valueNames: ['data-owner-name', 'data-link', 'data-kind'],
+    });
+</script>
+
+{{template "footer" .}}
+{{end}}
