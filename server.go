@@ -44,12 +44,19 @@ func main() {
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		panic(fmt.Errorf("fatal error config file: %s\n", err))
 	}
 
 	// Initialize CW API client
-	client = cwapi.NewClient(viper.GetString("cwapi.username"), viper.GetString("cwapi.password"))
-	client.InitYellowPages()
+	client, err = cwapi.NewClient(viper.GetString("cwapi.username"), viper.GetString("cwapi.password"))
+	if err != nil {
+		panic(fmt.Errorf("fatal error chat wars api client: %v\n", err))
+	}
+
+	err = client.InitYellowPages()
+	if err != nil {
+		panic(fmt.Errorf("fatal error chat wars api yellowpages: %v\n", err))
+	}
 
 	// API Responses
 	go func() {
