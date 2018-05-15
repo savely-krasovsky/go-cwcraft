@@ -27,6 +27,7 @@ func Index(c echo.Context) error {
 		equipmentItem
 		Recipe        []basic
 		Basics        []basic
+		Purchases     []basic
 		Commands      []command
 		TotalManaCost int
 		ShowUserData  bool
@@ -66,6 +67,8 @@ func Index(c echo.Context) error {
 			}
 		}
 
+		var purchases []basic
+
 		showUserData := false
 		if user.ID != "" {
 			showUserData = true
@@ -78,12 +81,16 @@ func Index(c echo.Context) error {
 					}
 				}
 			}
+
+			purchases = RecurPurchases(e.Recipe, user.Stock)
+			purchases = SplitPurchases(purchases)
 		}
 
 		extItem := extendedItem{
 			e,
 			recipe,
 			basics,
+			purchases,
 			commands,
 			0,
 			showUserData,
@@ -97,6 +104,7 @@ func Index(c echo.Context) error {
 		// Sort recipe and basics to fix it
 		sort.Slice(extItem.Recipe, func(i, j int) bool { return extItem.Recipe[i].Name < extItem.Recipe[j].Name })
 		sort.Slice(extItem.Basics, func(i, j int) bool { return extItem.Basics[i].Name < extItem.Basics[j].Name })
+		sort.Slice(extItem.Purchases, func(i, j int) bool { return extItem.Purchases[i].Name < extItem.Purchases[j].Name })
 
 		extItems = append(extItems, extItem)
 	}
@@ -119,6 +127,7 @@ func Resources(c echo.Context) error {
 		resource
 		Recipe        []basic
 		Basics        []basic
+		Purchases     []basic
 		Commands      []command
 		TotalManaCost int
 		ShowUserData  bool
@@ -163,6 +172,8 @@ func Resources(c echo.Context) error {
 			}
 		}
 
+		var purchases []basic
+
 		showUserData := false
 		if user.ID != "" {
 			showUserData = true
@@ -175,12 +186,16 @@ func Resources(c echo.Context) error {
 					}
 				}
 			}
+
+			purchases = RecurPurchases(r.Recipe, user.Stock)
+			purchases = SplitPurchases(purchases)
 		}
 
 		extItem := extendedItem{
 			r,
 			recipe,
 			basics,
+			purchases,
 			commands,
 			0,
 			showUserData,
@@ -194,6 +209,7 @@ func Resources(c echo.Context) error {
 		// Sort recipe and basics to fix it
 		sort.Slice(extItem.Recipe, func(i, j int) bool { return extItem.Recipe[i].Name < extItem.Recipe[j].Name })
 		sort.Slice(extItem.Basics, func(i, j int) bool { return extItem.Basics[i].Name < extItem.Basics[j].Name })
+		sort.Slice(extItem.Purchases, func(i, j int) bool { return extItem.Purchases[i].Name < extItem.Purchases[j].Name })
 
 		extItems = append(extItems, extItem)
 	}
@@ -216,6 +232,7 @@ func Alchemist(c echo.Context) error {
 		alchemyItem
 		Recipe        []basic
 		Basics        []basic
+		Purchases     []basic
 		Commands      []command
 		TotalManaCost int
 		ShowUserData  bool
@@ -255,6 +272,8 @@ func Alchemist(c echo.Context) error {
 			}
 		}
 
+		var purchases []basic
+
 		showUserData := false
 		if user.ID != "" {
 			showUserData = true
@@ -267,12 +286,16 @@ func Alchemist(c echo.Context) error {
 					}
 				}
 			}
+
+			purchases = RecurPurchases(a.Recipe, user.Stock)
+			purchases = SplitPurchases(purchases)
 		}
 
 		extItem := extendedItem{
 			a,
 			recipe,
 			basics,
+			purchases,
 			commands,
 			0,
 			showUserData,
@@ -286,6 +309,7 @@ func Alchemist(c echo.Context) error {
 		// Sort recipe and basics to fix it
 		sort.Slice(extItem.Recipe, func(i, j int) bool { return extItem.Recipe[i].Name < extItem.Recipe[j].Name })
 		sort.Slice(extItem.Basics, func(i, j int) bool { return extItem.Basics[i].Name < extItem.Basics[j].Name })
+		sort.Slice(extItem.Purchases, func(i, j int) bool { return extItem.Purchases[i].Name < extItem.Purchases[j].Name })
 
 		extItems = append(extItems, extItem)
 	}

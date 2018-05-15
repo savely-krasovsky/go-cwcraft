@@ -9,11 +9,11 @@ import (
 )
 
 func HandleUpdate(update cwapi.Response) error {
-	switch update.Action {
-	case "createAuthCode":
-		if update.Result == "Ok" {
+	switch update.GetActionEnum() {
+	case cwapi.CreateAuthCode:
+		if update.GetResultEnum() == cwapi.Ok {
 			_, err := usersCol.CreateDocument(nil, user{
-				ID: fmt.Sprint(update.ParsedPayload.(cwapi.ResCreateAuthCode).UserID),
+				ID: fmt.Sprint(update.Payload.ResCreateAuthCode.UserID),
 			})
 			if err != nil && err.(driver.ArangoError).ErrorNum == 1210 {
 				// pass it
@@ -22,7 +22,7 @@ func HandleUpdate(update cwapi.Response) error {
 			}
 		}
 
-		if waiter, found := waiters.Load(update.ParsedPayload.(cwapi.ResCreateAuthCode).UserID); found {
+		if waiter, found := waiters.Load(update.Payload.ResCreateAuthCode.UserID); found {
 			// found? send it to waiter channel
 			if update.Result == "Ok" {
 				waiter.(chan map[string]string) <- map[string]string{"createAuthCode": "waitingCode"}
@@ -33,13 +33,13 @@ func HandleUpdate(update cwapi.Response) error {
 			// trying to prevent memory leak
 			close(waiter.(chan map[string]string))
 		}
-	case "grantToken":
-		if update.Result == "Ok" {
+	case cwapi.GrantToken:
+		if update.GetResultEnum() == cwapi.Ok {
 			_, err := usersCol.UpdateDocument(
 				nil,
-				fmt.Sprint(update.ParsedPayload.(cwapi.ResGrantToken).UserID),
+				fmt.Sprint(update.Payload.ResGrantToken.UserID),
 				user{
-					Token: update.ParsedPayload.(cwapi.ResGrantToken).Token,
+					Token: update.Payload.ResGrantToken.Token,
 				},
 			)
 			if err != nil {
@@ -47,7 +47,7 @@ func HandleUpdate(update cwapi.Response) error {
 			}
 		}
 
-		if waiter, found := waiters.Load(update.ParsedPayload.(cwapi.ResGrantToken).UserID); found {
+		if waiter, found := waiters.Load(update.Payload.ResGrantToken.UserID); found {
 			// found? send it to waiter channel
 			if update.Result == "Ok" {
 				waiter.(chan map[string]string) <- map[string]string{"grantToken": "success"}
@@ -58,8 +58,8 @@ func HandleUpdate(update cwapi.Response) error {
 			// trying to prevent memory leak
 			close(waiter.(chan map[string]string))
 		}
-	case "requestStock":
-		if update.Result == "Ok" {
+	case cwapi.RequestStock:
+		if update.GetResultEnum() == cwapi.Ok {
 			_, err := db.Query(
 				nil,
 				`FOR u IN users
@@ -68,8 +68,8 @@ func HandleUpdate(update cwapi.Response) error {
 							stock: @stock
 						} IN users OPTIONS {mergeObjects: false}`,
 				map[string]interface{}{
-					"key":   fmt.Sprint(update.ParsedPayload.(cwapi.ResRequestStock).UserID),
-					"stock": update.ParsedPayload.(cwapi.ResRequestStock).Stock,
+					"key":   fmt.Sprint(update.Payload.ResRequestStock.UserID),
+					"stock": update.Payload.ResRequestStock.Stock,
 				},
 			)
 			if err != nil {

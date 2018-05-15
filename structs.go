@@ -43,9 +43,10 @@ type (
 	}
 
 	basic struct {
-		Name       string `json:"name"`
-		Amount     int    `json:"amount"`
-		UserAmount int    `json:"user_amount,omitempty"`
+		Name           string `json:"name"`
+		Amount         int    `json:"amount"`
+		UserAmount     int    `json:"user_amount,omitempty"`
+		RequiredAmount int    `json:"required_amount,omitempty"`
 	}
 
 	login struct {
