@@ -84,6 +84,9 @@ func Index(c echo.Context) error {
 
 			purchases = RecurPurchases(e.Recipe, user.Stock)
 			purchases = SplitPurchases(purchases)
+
+			commands = RecurUserCommands(e.Recipe, user.Stock)
+			commands = SplitUserCommands(commands)
 		}
 
 		extItem := extendedItem{
@@ -189,6 +192,9 @@ func Resources(c echo.Context) error {
 
 			purchases = RecurPurchases(r.Recipe, user.Stock)
 			purchases = SplitPurchases(purchases)
+
+			commands = RecurUserCommands(r.Recipe, user.Stock)
+			commands = SplitUserCommands(commands)
 		}
 
 		extItem := extendedItem{
@@ -289,6 +295,9 @@ func Alchemist(c echo.Context) error {
 
 			purchases = RecurPurchases(a.Recipe, user.Stock)
 			purchases = SplitPurchases(purchases)
+
+			commands = RecurUserCommands(a.Recipe, user.Stock)
+			commands = SplitUserCommands(commands)
 		}
 
 		extItem := extendedItem{

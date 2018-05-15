@@ -221,3 +221,70 @@ func SplitPurchases(purchases []basic) []basic {
 
 	return newPurchases
 }
+
+func RecurUserCommands(rec map[string]int, userStock map[string]int) (commands []command) {
+	for name, amount := range rec {
+		requiredAmount := amount
+
+		if ua, ok := userStock[name]; ok {
+			requiredAmount = amount - ua
+
+			if requiredAmount < 0 {
+				requiredAmount = 0
+			}
+		}
+
+		res, err := findResource(name)
+		if err != nil {
+			continue
+		}
+
+		if res.Composite {
+			commands = append(commands, newCommand(res, requiredAmount))
+
+			// copy (else we will change reference)
+			recipe := copyMap(res.Recipe)
+
+			// multiple amount in recipe
+			for recipeName, recipeAmount := range recipe {
+				recipe[recipeName] = recipeAmount * requiredAmount
+			}
+
+			commands = append(commands, RecurUserCommands(recipe, userStock)...)
+		}
+	}
+
+	return
+}
+
+func SplitUserCommands(commands []command) []command {
+	newCommands := make([]command, 0)
+
+	for _, c := range commands {
+		if c.Amount == 0 {
+			continue
+		}
+
+		found := false
+
+		for j, nc := range newCommands {
+			if c.Name == nc.Name {
+				found = true
+
+				newCommands[j].Amount += c.Amount
+				newCommands[j].CommandManaCost += c.CommandManaCost
+			}
+		}
+
+		if !found {
+			newCommands = append(newCommands, c)
+		}
+	}
+
+	// don't forget to reverse array
+	for i, j := 0, len(newCommands)-1; i < j; i, j = i+1, j-1 {
+		newCommands[i], newCommands[j] = newCommands[j], newCommands[i]
+	}
+
+	return newCommands
+}
