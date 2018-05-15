@@ -6,8 +6,6 @@ import (
 	"github.com/arangodb/go-driver"
 	"github.com/arangodb/go-driver/http"
 	"github.com/spf13/viper"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"io/ioutil"
 )
 
@@ -55,27 +53,6 @@ func Init() error {
 	if err != nil {
 		return err
 	}
-
-	// Configuration defaults
-	// Log level: INFO (-1 for DEBUG)
-	viper.SetDefault("log.level", 0)
-	// Log type: "production" or "development"
-	viper.SetDefault("log.type", "production")
-
-	// Init logger
-	var loggerConfig zap.Config
-	if viper.GetString("log.type") == "production" {
-		loggerConfig = zap.NewProductionConfig()
-	}
-	if viper.GetString("log.type") == "development" {
-		loggerConfig = zap.NewDevelopmentConfig()
-	}
-	loggerConfig.Level.SetLevel(zapcore.Level(viper.GetInt("log.level")))
-
-	logger, _ := loggerConfig.Build()
-	defer logger.Sync()
-
-	sugar = logger.Sugar()
 
 	// Init database
 	err = InitConnectionPool()

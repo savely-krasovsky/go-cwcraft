@@ -12,6 +12,7 @@ import (
 	"html/template"
 	"io"
 	"sync"
+	"github.com/labstack/gommon/log"
 )
 
 var (
@@ -47,7 +48,7 @@ func main() {
 	go func() {
 		for update := range client.Updates {
 			if err := HandleUpdate(update); err != nil {
-				sugar.Warn(err)
+				log.Warn(err)
 			}
 		}
 	}()
@@ -56,7 +57,7 @@ func main() {
 	go func() {
 		for pages := range client.YellowPages {
 			if err := HandlePages(pages); err != nil {
-				sugar.Warn(err)
+				log.Warn(err)
 			}
 		}
 	}()
