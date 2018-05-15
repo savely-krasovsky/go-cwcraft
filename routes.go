@@ -42,14 +42,6 @@ func Index(c echo.Context) error {
 		commands := RecurCommands(e.Recipe)
 		commands = SplitCommands(commands)
 
-		// add craft itself
-		commands = append(commands, command{
-			e.ID,
-			e.Name,
-			1,
-			e.ManaCost,
-		})
-
 		// make recipe to add user amount field
 		var recipe []basic
 		for name, amount := range e.Recipe {
@@ -88,6 +80,14 @@ func Index(c echo.Context) error {
 			commands = RecurUserCommands(e.Recipe, user.Stock)
 			commands = SplitUserCommands(commands)
 		}
+
+		// add craft itself
+		commands = append(commands, command{
+			e.ID,
+			e.Name,
+			1,
+			e.ManaCost,
+		})
 
 		extItem := extendedItem{
 			e,
@@ -150,14 +150,6 @@ func Resources(c echo.Context) error {
 		commands := RecurCommands(r.Recipe)
 		commands = SplitCommands(commands)
 
-		// add craft itself
-		commands = append(commands, command{
-			r.ID,
-			r.Name,
-			1,
-			r.ManaCost,
-		})
-
 		// make recipe to add user amount field
 		var recipe []basic
 		for name, amount := range r.Recipe {
@@ -196,6 +188,14 @@ func Resources(c echo.Context) error {
 			commands = RecurUserCommands(r.Recipe, user.Stock)
 			commands = SplitUserCommands(commands)
 		}
+
+		// add craft itself
+		commands = append(commands, command{
+			r.ID,
+			r.Name,
+			1,
+			r.ManaCost,
+		})
 
 		extItem := extendedItem{
 			r,
@@ -253,14 +253,6 @@ func Alchemist(c echo.Context) error {
 		commands := RecurCommands(a.Recipe)
 		commands = SplitCommands(commands)
 
-		// add craft itself
-		commands = append(commands, command{
-			a.ID,
-			a.Name,
-			1,
-			a.ManaCost,
-		})
-
 		// make recipe to add user amount field
 		var recipe []basic
 		for name, amount := range a.Recipe {
@@ -299,6 +291,14 @@ func Alchemist(c echo.Context) error {
 			commands = RecurUserCommands(a.Recipe, user.Stock)
 			commands = SplitUserCommands(commands)
 		}
+
+		// add craft itself
+		commands = append(commands, command{
+			a.ID,
+			a.Name,
+			1,
+			a.ManaCost,
+		})
 
 		extItem := extendedItem{
 			a,
