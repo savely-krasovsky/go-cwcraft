@@ -1,19 +1,16 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/L11R/go-chatwars-api"
 	"github.com/arangodb/go-driver"
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
-	"github.com/labstack/gommon/log"
 	"github.com/spf13/viper"
+	"go.uber.org/zap"
 	"html/template"
 	"io"
-	"io/ioutil"
 	"sync"
 )
 
@@ -26,7 +23,8 @@ var (
 
 	db       driver.Database
 	usersCol driver.Collection
-	shopsCol driver.Collection
+
+	sugar *zap.SugaredLogger
 
 	waiters sync.Map
 )
@@ -40,29 +38,16 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 func main() {
-	viper.SetConfigName("config")
-	viper.AddConfigPath(".")
-	err := viper.ReadInConfig() // Find and read the config file
-	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %s\n", err))
-	}
-
-	// Initialize CW API client
-	client, err = cwapi.NewClient(viper.GetString("cwapi.username"), viper.GetString("cwapi.password"))
-	if err != nil {
-		panic(fmt.Errorf("fatal error chat wars api client: %v\n", err))
-	}
-
-	err = client.InitYellowPages()
-	if err != nil {
-		panic(fmt.Errorf("fatal error chat wars api yellowpages: %v\n", err))
+	// Init Configurator, Logger, Database, CW API, resources
+	if err := Init(); err != nil {
+		panic(err)
 	}
 
 	// API Responses
 	go func() {
 		for update := range client.Updates {
 			if err := HandleUpdate(update); err != nil {
-				log.Error(err)
+				sugar.Warn(err)
 			}
 		}
 	}()
@@ -71,57 +56,16 @@ func main() {
 	go func() {
 		for pages := range client.YellowPages {
 			if err := HandlePages(pages); err != nil {
-				log.Error(err)
+				sugar.Warn(err)
 			}
 		}
 	}()
 
-	// Database pool init
-	if err := InitConnectionPool(); err != nil {
-		log.Fatal(err)
-	}
-
 	// Update all user stocks
 	go func() {
 		err := UpdateStocks()
-		log.Error(err)
+		sugar.Warn(err)
 	}()
-
-	// Read equipment
-	b, err := ioutil.ReadFile("res/equipment.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Unmarshal equipment
-	err = json.Unmarshal(b, &equipment)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Read equipment
-	b, err = ioutil.ReadFile("res/alchemy.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Unmarshal equipment
-	err = json.Unmarshal(b, &alchemy)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Read resources
-	b, err = ioutil.ReadFile("res/resources.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Unmarshal resources
-	err = json.Unmarshal(b, &resources)
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	e := echo.New()
 	e.Static("/", "static")

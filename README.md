@@ -1,7 +1,7 @@
-# [CW Craft Site 1.4](http://cw.krasovsky.me/)
+# [CW Craft Site 1.5](http://cw.krasovsky.me/)
 ![cw.krasovsky.me](https://i.imgur.com/Q6pUWhw.gif)
 
-# CW Craft API 1.4 documentation
+# CW Craft API 1.5 documentation
 
 ### Equipment
 * `/api/equipment`

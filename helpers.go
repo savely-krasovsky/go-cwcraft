@@ -29,6 +29,7 @@ func newBasic(name string, amount int) basic {
 		name,
 		amount,
 		0,
+		0,
 	}
 }
 
@@ -143,4 +144,80 @@ func SplitCommands(commands []command) []command {
 	}
 
 	return newCommands
+}
+
+func RecurPurchases(rec map[string]int, userStock map[string]int) (purchases []basic) {
+	for name, amount := range rec {
+		userAmount := 0
+		requiredAmount := amount
+
+		if ua, ok := userStock[name]; ok {
+			userAmount = ua
+			requiredAmount = amount - ua
+
+			if requiredAmount < 0 {
+				requiredAmount = 0
+			}
+		}
+
+		res, err := findResource(name)
+		if err != nil {
+			// if can't find (for example unknown element, recipe or frag)
+			purchases = append(purchases, basic{
+				name,
+				amount,
+				userAmount,
+				requiredAmount,
+			})
+			continue
+		}
+
+		if !res.Composite {
+			// if it already basic
+			purchases = append(purchases, basic{
+				name,
+				amount,
+				userAmount,
+				requiredAmount,
+			})
+			continue
+		}
+
+		// copy (else we will change reference)
+		newRec := copyMap(res.Recipe)
+
+		// multiple amount in recipe
+		for recipeName, recipeAmount := range newRec {
+			newRec[recipeName] = recipeAmount * requiredAmount
+		}
+
+		purchases = append(purchases, RecurPurchases(newRec, userStock)...)
+	}
+
+	return
+}
+
+func SplitPurchases(purchases []basic) []basic {
+	newPurchases := make([]basic, 0)
+
+	for _, p := range purchases {
+		if p.RequiredAmount == 0 {
+			continue
+		}
+
+		found := false
+
+		for j, np := range newPurchases {
+			if p.Name == np.Name {
+				found = true
+				newPurchases[j].RequiredAmount += p.RequiredAmount
+			}
+		}
+
+		if !found {
+			newPurchases = append(newPurchases, p)
+		}
+	}
+
+	return newPurchases
 }
