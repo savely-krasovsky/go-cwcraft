@@ -1,5 +1,5 @@
 cwapi:
-  username: kraso_cw_craft
+  user: kraso_cw_craft
   password: 44fE1y42SrKTLkOsfcfVKB4elywrkOtM
 
 database:
@@ -8,5 +8,4 @@ database:
   username: cwcraft
   password: qw5as5zx5
 
-sessions_secret: secret
-#x72rP3532t4kDJ9K96ohaXUA
+sessions_secret: x72rP3532t4kDJ9K96ohaXUA
