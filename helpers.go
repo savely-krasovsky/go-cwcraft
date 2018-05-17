@@ -119,6 +119,11 @@ func RecurCommands(rec map[string]int) (commands []command) {
 }
 
 func SplitCommands(commands []command) []command {
+	// don't forget to reverse array
+	for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
+		commands[i], commands[j] = commands[j], commands[i]
+	}
+
 	newCommands := make([]command, 0)
 
 	for _, c := range commands {
@@ -136,11 +141,6 @@ func SplitCommands(commands []command) []command {
 		if !found {
 			newCommands = append(newCommands, c)
 		}
-	}
-
-	// don't forget to reverse array
-	for i, j := 0, len(newCommands)-1; i < j; i, j = i+1, j-1 {
-		newCommands[i], newCommands[j] = newCommands[j], newCommands[i]
 	}
 
 	return newCommands
@@ -258,6 +258,11 @@ func RecurUserCommands(rec map[string]int, userStock map[string]int) (commands [
 }
 
 func SplitUserCommands(commands []command) []command {
+	// don't forget to reverse array
+	for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
+		commands[i], commands[j] = commands[j], commands[i]
+	}
+
 	newCommands := make([]command, 0)
 
 	for _, c := range commands {
@@ -279,11 +284,6 @@ func SplitUserCommands(commands []command) []command {
 		if !found {
 			newCommands = append(newCommands, c)
 		}
-	}
-
-	// don't forget to reverse array
-	for i, j := 0, len(newCommands)-1; i < j; i, j = i+1, j-1 {
-		newCommands[i], newCommands[j] = newCommands[j], newCommands[i]
 	}
 
 	return newCommands
