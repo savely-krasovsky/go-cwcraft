@@ -7,12 +7,11 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
+	"github.com/labstack/gommon/log"
 	"github.com/spf13/viper"
-	"go.uber.org/zap"
 	"html/template"
 	"io"
 	"sync"
-	"github.com/labstack/gommon/log"
 )
 
 var (
@@ -24,8 +23,6 @@ var (
 
 	db       driver.Database
 	usersCol driver.Collection
-
-	sugar *zap.SugaredLogger
 
 	waiters sync.Map
 )
@@ -65,7 +62,7 @@ func main() {
 	// Update all user stocks
 	go func() {
 		err := UpdateStocks()
-		sugar.Warn(err)
+		log.Warn(err)
 	}()
 
 	e := echo.New()

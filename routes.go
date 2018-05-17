@@ -37,10 +37,10 @@ func Index(c echo.Context) error {
 
 	for _, e := range equipment {
 		basics := RecurBasics(e.Recipe)
-		basics = SplitBasics(basics)
+		basics = FoldBasics(basics)
 
 		commands := RecurCommands(e.Recipe)
-		commands = SplitCommands(commands)
+		commands = FoldCommands(commands)
 
 		// make recipe to add user amount field
 		var recipe []basic
@@ -75,10 +75,10 @@ func Index(c echo.Context) error {
 			}
 
 			purchases = RecurPurchases(e.Recipe, user.Stock)
-			purchases = SplitPurchases(purchases)
+			purchases = FoldPurchases(purchases)
 
 			commands = RecurUserCommands(e.Recipe, user.Stock)
-			commands = SplitUserCommands(commands)
+			commands = FoldCommands(commands)
 		}
 
 		// add craft itself
@@ -145,10 +145,10 @@ func Resources(c echo.Context) error {
 		}
 
 		basics := RecurBasics(r.Recipe)
-		basics = SplitBasics(basics)
+		basics = FoldBasics(basics)
 
 		commands := RecurCommands(r.Recipe)
-		commands = SplitCommands(commands)
+		commands = FoldCommands(commands)
 
 		// make recipe to add user amount field
 		var recipe []basic
@@ -183,10 +183,10 @@ func Resources(c echo.Context) error {
 			}
 
 			purchases = RecurPurchases(r.Recipe, user.Stock)
-			purchases = SplitPurchases(purchases)
+			purchases = FoldPurchases(purchases)
 
 			commands = RecurUserCommands(r.Recipe, user.Stock)
-			commands = SplitUserCommands(commands)
+			commands = FoldCommands(commands)
 		}
 
 		// add craft itself
@@ -248,10 +248,10 @@ func Alchemist(c echo.Context) error {
 
 	for _, a := range alchemy {
 		basics := RecurBasics(a.Recipe)
-		basics = SplitBasics(basics)
+		basics = FoldBasics(basics)
 
 		commands := RecurCommands(a.Recipe)
-		commands = SplitCommands(commands)
+		commands = FoldCommands(commands)
 
 		// make recipe to add user amount field
 		var recipe []basic
@@ -286,10 +286,10 @@ func Alchemist(c echo.Context) error {
 			}
 
 			purchases = RecurPurchases(a.Recipe, user.Stock)
-			purchases = SplitPurchases(purchases)
+			purchases = FoldPurchases(purchases)
 
 			commands = RecurUserCommands(a.Recipe, user.Stock)
-			commands = SplitUserCommands(commands)
+			commands = FoldCommands(commands)
 		}
 
 		// add craft itself
@@ -586,7 +586,7 @@ func getBasics(c echo.Context) error {
 		for _, e := range equipment {
 			if e.ID == id {
 				basics := RecurBasics(e.Recipe)
-				basics = SplitBasics(basics)
+				basics = FoldBasics(basics)
 
 				return c.JSON(http.StatusOK, response{
 					e,
@@ -598,7 +598,7 @@ func getBasics(c echo.Context) error {
 		for _, a := range alchemy {
 			if a.ID == id {
 				basics := RecurBasics(a.Recipe)
-				basics = SplitBasics(basics)
+				basics = FoldBasics(basics)
 
 				return c.JSON(http.StatusOK, response{
 					a,
@@ -626,7 +626,7 @@ func getCommands(c echo.Context) error {
 		for _, e := range equipment {
 			if e.ID == id {
 				commands := RecurCommands(e.Recipe)
-				commands = SplitCommands(commands)
+				commands = FoldCommands(commands)
 
 				// add craft itself
 				commands = append(commands, command{
@@ -654,7 +654,7 @@ func getCommands(c echo.Context) error {
 		for _, a := range alchemy {
 			if a.ID == id {
 				commands := RecurCommands(a.Recipe)
-				commands = SplitCommands(commands)
+				commands = FoldCommands(commands)
 
 				// add craft itself
 				commands = append(commands, command{

@@ -62,7 +62,7 @@ func RecurBasics(rec map[string]int) (basics []basic) {
 	return
 }
 
-func SplitBasics(basics []basic) []basic {
+func FoldBasics(basics []basic) []basic {
 	newBasics := make([]basic, 0)
 
 	for _, b := range basics {
@@ -118,7 +118,7 @@ func RecurCommands(rec map[string]int) (commands []command) {
 	return
 }
 
-func SplitCommands(commands []command) []command {
+func FoldCommands(commands []command) []command {
 	// don't forget to reverse array
 	for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
 		commands[i], commands[j] = commands[j], commands[i]
@@ -127,6 +127,11 @@ func SplitCommands(commands []command) []command {
 	newCommands := make([]command, 0)
 
 	for _, c := range commands {
+		// Skip zero amount for user commands
+		if c.Amount == 0 {
+			continue
+		}
+
 		found := false
 
 		for j, nc := range newCommands {
@@ -197,7 +202,7 @@ func RecurPurchases(rec map[string]int, userStock map[string]int) (purchases []b
 	return
 }
 
-func SplitPurchases(purchases []basic) []basic {
+func FoldPurchases(purchases []basic) []basic {
 	newPurchases := make([]basic, 0)
 
 	for _, p := range purchases {
@@ -255,36 +260,4 @@ func RecurUserCommands(rec map[string]int, userStock map[string]int) (commands [
 	}
 
 	return
-}
-
-func SplitUserCommands(commands []command) []command {
-	// don't forget to reverse array
-	for i, j := 0, len(commands)-1; i < j; i, j = i+1, j-1 {
-		commands[i], commands[j] = commands[j], commands[i]
-	}
-
-	newCommands := make([]command, 0)
-
-	for _, c := range commands {
-		if c.Amount == 0 {
-			continue
-		}
-
-		found := false
-
-		for j, nc := range newCommands {
-			if c.Name == nc.Name {
-				found = true
-
-				newCommands[j].Amount += c.Amount
-				newCommands[j].CommandManaCost += c.CommandManaCost
-			}
-		}
-
-		if !found {
-			newCommands = append(newCommands, c)
-		}
-	}
-
-	return newCommands
 }
