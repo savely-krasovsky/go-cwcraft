@@ -20,7 +20,7 @@
     "composite": true,
     "recipe": {
       "Assassin Vine": 1,
-      "Plasma of Abyss": 1,
+      "Plasma of abyss": 1,
       "Storm Hyssop": 2
     }
   },
@@ -32,7 +32,7 @@
     "mana_cost": 30,
     "composite": true,
     "recipe": {
-      "Plasma of Abyss": 1,
+      "Plasma of abyss": 1,
       "Spring Bay Leaf": 1,
       "Wolf Root": 1,
       "Assassin Vine": 2
@@ -136,7 +136,7 @@
       "Powder": 7,
       "Ephijora": 3,
       "Bone Powder": 3,
-      "Plasma of Abyss": 1
+      "Plasma of abyss": 1
     }
   }
 ]
