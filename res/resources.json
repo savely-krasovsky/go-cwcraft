@@ -349,6 +349,7 @@
     "id": "505",
     "name": "Wooden arrows pack",
     "mana_cost": 80,
+    "composite": true,
     "recipe": {
       "Iron ore": 1,
       "Stick": 6
@@ -358,6 +359,7 @@
     "id": "506",
     "name": "Remedy pack",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Cliff Rue": 1,
       "Tecceagrass": 1
@@ -367,6 +369,7 @@
     "id": "508",
     "name": "Poison pack",
     "mana_cost": 10,
+    "composite": true,
     "recipe": {
       "Maccunut": 1,
       "Ephijora": 1
@@ -376,6 +379,7 @@
     "id": "511",
     "name": "Steel arrows pack",
     "mana_cost": 120,
+    "composite": true,
     "recipe": {
       "Steel": 1,
       "Stick": 4
