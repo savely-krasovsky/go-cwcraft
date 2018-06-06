@@ -61,7 +61,7 @@ func Init() error {
 	}
 
 	// Init Chat Wars API client
-	client, err = cwapi.NewClient(viper.GetString("cwapi.user"), viper.GetString("cwapi.password"))
+	client, err = cwapi.NewClient(viper.GetString("cwapi.user"), viper.GetString("cwapi.password"), viper.GetString("cwapi.server"))
 	if err != nil {
 		return err
 	}
