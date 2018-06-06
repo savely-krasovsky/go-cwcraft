@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/L11R/go-chatwars-api"
 	"github.com/arangodb/go-driver"
 	"github.com/gorilla/sessions"
@@ -105,5 +106,5 @@ func main() {
 	e.GET("/api/shops", getShops)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", viper.GetString("port"))))
 }
