@@ -202,6 +202,17 @@
     }
   },
   {
+    "id": "35",
+    "name": "Crafted leather",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Leather": 4,
+      "Coal": 4,
+      "Cord": 1
+    }
+  },
+  {
     "id": "39",
     "name": "Stinky Sumac"
   },
@@ -403,6 +414,17 @@
     "recipe": {
       "Steel": 1,
       "Stick": 4
+    }
+  },
+  {
+    "id": "513",
+    "name": "Silver arrows pack",
+    "mana_cost": 150,
+    "composite": true,
+    "recipe": {
+      "Stick": 7,
+      "Silver ore": 5,
+      "Powder": 5
     }
   },
   {
