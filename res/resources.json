@@ -40,6 +40,16 @@
     "name": "Silver ore"
   },
   {
+    "id": "12",
+    "name": "Cord",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Thread": 7,
+      "Steel": 1
+    }
+  },
+  {
     "id": "13",
     "name": "Magic stone"
   },
@@ -179,6 +189,16 @@
       "Iron ore": 3,
       "Stick": 3,
       "Powder": 3
+    }
+  },
+  {
+    "id": "34",
+    "name": "Metallic fiber",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Silver ore": 15,
+      "Cord": 2
     }
   },
   {
