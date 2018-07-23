@@ -357,6 +357,33 @@
     }
   },
   {
+    "id": "65",
+    "name": "Astrulic"
+  },
+  {
+    "id": "66",
+    "name": "Flammia Nut"
+  },
+  {
+    "id": "67",
+    "name": "Plexisop"
+  },
+  {
+    "id": "68",
+    "name": "Mammoth Dill"
+  },
+  {
+    "id": "69",
+    "name": "Silver dust",
+    "mana_cost": 10,
+    "composite": true,
+    "recipe": {
+      "Powder": 2,
+      "Silver ore": 5,
+      "Tecceagrass": 1
+    }
+  },
+  {
     "id": "100",
     "name": "Pouch of gold",
     "mana_cost": 10,
