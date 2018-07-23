@@ -138,5 +138,103 @@
       "Bone Powder": 3,
       "Plasma of abyss": 1
     }
+  },
+  {
+    "name": "Bottle of Nature",
+    "Effect": "+5 Harvest skill",
+    "id": "p12",
+    "type": "bottle",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Kloliarway": 1,
+      "Purified powder": 1,
+      "Plasma of abyss": 3
+    }
+  },
+  {
+    "name": "Vial of Mana",
+    "Effect": "+1/min manaregen",
+    "id": "p13",
+    "type": "vial",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Tecceagrass": 2,
+      "Ethereal Bone": 1,
+      "Cliff Rue": 1,
+      "Powder": 3
+    }
+  },
+  {
+    "name": "Potion of Mana",
+    "Effect": "+?/min manaregen",
+    "id": "p14",
+    "type": "potion",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Maccunut": 2,
+      "Astrulic": 1,
+      "Cliff Rue": 3,
+      "Itacory": 2,
+      "Powder": 3
+    }
+  },
+  {
+    "name": "Vial of Twilight",
+    "id": "p16",
+    "type": "vial",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Tecceagrass": 2,
+      "Stinky Sumac": 1,
+      "Love Creeper": 1,
+      "Silver ore": 3
+    }
+  },
+  {
+    "name": "Potion of Twilight",
+    "id": "p17",
+    "type": "potion",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Kloliarway": 1,
+      "Yellow Seed": 2,
+      "Ilaves": 3,
+      "Astrulic": 1,
+      "Silver dust": 1
+    }
+  },
+  {
+    "name": "Vial of Morph",
+    "id": "p19",
+    "type": "vial",
+    "mana_cost": 15,
+    "composite": true,
+    "recipe": {
+      "Itacory": 1,
+      "Assassin Vine": 1,
+      "Powder": 5,
+      "Storm Hyssop": 1,
+      "Flammia Nut": 1
+    }
+  },
+  {
+    "name": "Potion of Morph",
+    "id": "p20",
+    "type": "potion",
+    "mana_cost": 30,
+    "composite": true,
+    "recipe": {
+      "Plasma of abyss": 1,
+      "Itacory": 1,
+      "Silver dust": 2,
+      "Queen's Pepper": 1,
+      "Mammoth Dill": 1,
+      "Maccunut": 3
+    }
   }
 ]
