@@ -1,7 +1,7 @@
 [
   {
     "name": "Vial of Rage",
-    "Effect": "+10% ⚔️",
+    "Effect": "+5% ⚔️",
     "id": "p01",
     "type": "vial",
     "mana_cost": 10,
@@ -13,7 +13,7 @@
   },
   {
     "name": "Potion of Rage",
-    "Effect": "+20% ⚔️",
+    "Effect": "+10% ⚔️",
     "id": "p02",
     "type": "potion",
     "mana_cost": 15,
@@ -26,7 +26,7 @@
   },
   {
     "name": "Bottle of Rage",
-    "Effect": "+30% ⚔️",
+    "Effect": "+15% ⚔️",
     "id": "p03",
     "type": "bottle",
     "mana_cost": 30,
@@ -40,7 +40,7 @@
   },
   {
     "name": "Vial of Peace",
-    "Effect": "+10% 🛡️",
+    "Effect": "+5% 🛡️",
     "id": "p04",
     "type": "vial",
     "mana_cost": 10,
@@ -52,7 +52,7 @@
   },
   {
     "name": "Potion of Peace",
-    "Effect": "+20% 🛡️",
+    "Effect": "+10% 🛡️",
     "id": "p05",
     "type": "potion",
     "mana_cost": 15,
@@ -65,7 +65,7 @@
   },
   {
     "name": "Bottle of Peace",
-    "Effect": "+30% 🛡️",
+    "Effect": "+15% 🛡️",
     "id": "p06",
     "type": "bottle",
     "mana_cost": 30,
@@ -154,7 +154,7 @@
   },
   {
     "name": "Vial of Mana",
-    "Effect": "+1/min manaregen",
+    "Effect": "+1/min, 💧",
     "id": "p13",
     "type": "vial",
     "mana_cost": 15,
@@ -168,7 +168,7 @@
   },
   {
     "name": "Potion of Mana",
-    "Effect": "+?/min manaregen",
+    "Effect": "+2/min, 💧",
     "id": "p14",
     "type": "potion",
     "mana_cost": 30,
@@ -182,7 +182,23 @@
     }
   },
   {
+    "name": "Bottle of Mana",
+    "Effect": "+3/min, 💧",
+    "id": "p15",
+    "type": "bottle",
+    "mana_cost": 45,
+    "composite": true,
+    "recipe": {
+      "Tecceagrass": 4,
+      "Ephijora": 2,
+      "Ethereal bone": 2,
+      "Kloliarway": 1,
+      "Plexisop": 1
+    }
+  },
+  {
     "name": "Vial of Twilight",
+    "Effect": "?, 🌝🔄🌚",
     "id": "p16",
     "type": "vial",
     "mana_cost": 15,
@@ -196,6 +212,7 @@
   },
   {
     "name": "Potion of Twilight",
+    "Effect": "?, 🌝🔄🌚",
     "id": "p17",
     "type": "potion",
     "mana_cost": 30,
@@ -209,7 +226,24 @@
     }
   },
   {
+    "name": "Bottle of Twilight",
+    "Effect": "?, 🌝🔄🌚",
+    "id": "p18",
+    "type": "bottle",
+    "mana_cost": 45,
+    "composite": true,
+    "recipe": {
+      "Maccunut": 3,
+      "Stinky Sumac": 3,
+      "Silver dust": 3,
+      "Wolf Root": 1,
+      "Kloliarway": 1,
+      "Mammoth Dill": 1
+    }
+  },
+  {
     "name": "Vial of Morph",
+    "Effect": "-30%, ⚔️🔄🛡",
     "id": "p19",
     "type": "vial",
     "mana_cost": 15,
@@ -224,6 +258,7 @@
   },
   {
     "name": "Potion of Morph",
+    "Effect": "-25%, ⚔️🔄🛡",
     "id": "p20",
     "type": "potion",
     "mana_cost": 30,
@@ -235,6 +270,24 @@
       "Queen's Pepper": 1,
       "Mammoth Dill": 1,
       "Maccunut": 3
+    }
+  },
+  {
+    "name": "Bottle of Morph",
+    "Effect": "?, ⚔️🔄🛡",
+    "id": "p21",
+    "type": "bottle",
+    "mana_cost": 45,
+    "composite": true,
+    "recipe": {
+      "Silver dust": 6,
+      "Ephijora": 3,
+      "Mercy Sassafras": 2,
+      "Flammia Nut": 1,
+      "Plasma of abyss": 1,
+      "Ultramarine dust": 1,
+      "Assassin Vine": 1,
+      "Plexisop": 1
     }
   }
 ]
